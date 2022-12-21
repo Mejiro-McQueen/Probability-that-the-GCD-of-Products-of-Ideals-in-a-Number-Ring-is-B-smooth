@@ -906,6 +906,24 @@ and that is what we wanted to prove.
 	$$\lim_{N\to\infty} \frac{T(l,N)}{H(N)^{mn}} = \prod_{i=1}^{l}\Big[1-\Big\{1-\Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big\}^m\Big].$$
 \end{proof}
 
+\noindent \textbf{Remark:} Here is an alternative proof. 
+
+\vspace{.1 in}
+	\noindent For any prime ideal $\mathfrak{p}$, there are $\bigl[H(N)-H\bigl(\frac{N}{\f{N(p)}}\bigr)\bigr]^n$ products of ideals with norm at most $N$ that are not divisible by $\f{N(p)}$. Hence, there are  $H(N)^n-\bigl[H(N)-H\bigl(\frac{N}{\f{N(p)}}\bigr)\bigr]^n$ products of ideal with norm at most \(N\) where at least one of them is divisible by $\f{N(p)}$. Therefore, there are $$H(N)^{nm}-\biggl(H(N)^n-\biggl[H\bigl(N\bigl)-H\biggl(\frac{N}{\f{N(p)}}\biggl)\biggl]^n\biggl)^m$$ $m$-tuples of products of positive integers each of which has norm at most $N$ and not divisible by $\f{N(p)}$.
+	
+	Then, since divisibility by finitely many norms are independent events, we conclude that $$T(l,N)=\prod_{i=1}^{l}\biggl[H(N)^{nm}-\biggl(H(N)^n-\biggl[H\bigl(N\bigl)-H\biggl(\frac{N}{\f{N(p}_i)}\biggl)\biggl]^n\biggl)^m\biggr].$$
+	
+	Next, we can compute the probability that the GCD of \(m\) products of random ideals with norm at most \(N\) are not divisible by primes in \(X_l\):
+	 $$\frac{T(l,N)}{H(N)^{nm}}=\prod_{i=1}^{l}\biggl[1-\biggl(1-\biggl[1-\frac{1}{H(N)}H\biggl(\frac{N}{\f{N(p)}}\biggr)\biggl]^n\biggr)^m\biggr].$$
+	
+	Next, we remove the class group function, \(H\), using [MARCUS ESTIMATE]. This yields
+	\begin{align}
+		\frac{T(l,N)}{H(N)^{mn}}=\prod_{i=1}^{l}\biggr[1-\biggr(1-\biggl[1-\frac{1}{\f{N}(\f{p}_i)}+O\biggl(\frac{1}{N^{\epsilon}}\biggl)\biggr]^n\biggr)^m\biggr]\\
+		=\prod_{i=1}^{l}\biggr[1-\biggr(1-\biggl(1-\frac{1}{\f{N}(\f{p}_i)}\biggr)^n\biggr)^m\biggr] + O\Big(\frac{1}{N^{\epsilon}}\Big),
+	\end{align}
+	for some constant \(\epsilon > 0\).
+	Letting \(N\to\infty\) now gives us the desired result. $\qed$\newline
+
 Setting \(\mathcal{O}=\mathbb{Z}\), prime ideals are substituted for the prime integers, and \(c=1\), yields the same result as for the integers case. As in the case for the integers, this only provides the probability for the first \(l\) prime ideals greater than \(B\). Using the Lebesgue Dominated Convergence Theorem, we can take the limit as \(l\) approaches infinity.
 
 \begin{theorem}
