@@ -1,4 +1,5 @@
 \documentclass[10pt,a4paper]{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -263,10 +264,7 @@ Applying this corollary, we have
 	\begin{align}
 	O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}|\mu(j)|\left(\frac{n}{j^r}\right)^{k-1}\right) 
 	& = O\left(n^{k-1}\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}|\mu(j)|\left(\frac{1}{j^{r(k-1)}}\right)\right) \notag\\
-	& = O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}|\mu(j)|\left(\frac{1}{j^{r(k-1)}}\right)\right)\notag\\
-	& = O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}|\mu(j)|\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right)\notag\\
-	& =O\left(n^{k-1}\right)O(1)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right)\notag\\
-	&=O\left(n^{k-1}\right)O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor}\left(\frac{1}{j^{r(k-1)}}\right)\right). \label{estimate_second}
+	& = n^{k-1} \cdot O\left(\sum_{j=1}^{\lfloor\sqrt[r]{n}\rfloor} \frac{1}{j^{r(k-1)}}\right)\notag. \label{estimate_second}
 	\end{align}
 
 	Next, we need to find out how fast each term in the summation grows.
@@ -319,9 +317,9 @@ Applying this corollary, we have
 	\end{equation}
 \end{proof}
 
-%\subsection{Benokski's Theorem Using Lebesgue Dominated Convergence Theorem}
-
 \section{Probability that the GCD of products of positive integers is  \texorpdfstring{\(B\)}{\mathbb{B}}-Friable}
+
+\subsection{Main content}
 
 \begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{$B$-friable ($B$-smooth)} if $x$ has no prime divisor greater than $B$. 
 \end{definition}
@@ -336,7 +334,117 @@ For the remainder of this section, we are going to find the probability that the
 
 To this end, we fix a positive integer $N$. Then, we randomly choose uniformly and independently integers $r_{ij} \in [1, N]$ for each integer $1 \leq i \leq m$ and $1 \leq j \leq n$ where $m \geq 2$ and $n \geq 1$. Define $T(l,N)$ to be the number of ordered tuples $(r_{ij})$ such that 
 $$\gcd\Big(\prod_{j=1}^nr_{1j}, ..., \prod_{j=1}^n r_{mj}\Big)$$
-is coprime to the first $l$ primes greater than $B$. We start by finding a summation formula for $T(l,N)$.
+is coprime to the first $l$ primes greater than $B$. 
+
+Before stating the main theorem for this section, we establish the following useful lemma that we use in the ensuing derivation below.
+
+\begin{lemma} If $n$ and $k$ are positive integers, then
+$$\frac{1}{n} \Big\lfloor \frac{n}{k} \Big\rfloor = \frac{1}{k} + O\Big(\frac{1}{n}\Big).$$
+\end{lemma}
+
+\begin{proof}
+Since we know by definition of the floor function that $0 \leq x - \lfloor x \rfloor < 1$ for any real number $x$, we can write
+$$0 \leq \frac{n}{k} - \Big\lfloor \frac{n}{k} \Big\rfloor < 1.$$
+Then, rearranging this inequality and dividing all three parts by $n$ yields
+$$0 \leq \frac{1}{k} - \frac{1}{n}\Big\lfloor \frac{n}{k}\Big\rfloor < \frac{1}{n}.$$
+The claim now directly follows.
+\end{proof}
+
+Now, we are ready to state and prove the main theorem of this section.
+
+\begin{theorem}
+Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. Then, the probability of the GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by \label{probability-random-first-l}
+$$\lim_{N\to\infty} \frac{T(l,N)}{N^{nm}} = \prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p^i}\Big)^n\Big)^m\Big].$$
+\end{theorem}
+
+\begin{proof}
+Note that for any prime $p$, there are $(N - \lfloor\frac{N}{p}\rfloor)^n$ products of $n$ positive integers each of which is at most $N$ that are not divisible by $p$. Hence, there are $N^n - (N - \lfloor\frac{N}{p}\rfloor)^n$ products of $n$ positive integers each of which is at most $N$ where at least one of them is divisible by $p$. Therefore, there are 
+$$N^{mn} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p}\Big\rfloor\Big)^n\Big)^m$$
+$m$-tuples of products of $n$ positive integers each of which is at most $N$ that are not divisible by $p$.
+
+Then, since divisibility by finitely many primes are independent events, we conclude that
+$$T(l, N) = \prod_{i=1}^l \Big[N^{nm} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p_i}\Big\rfloor\Big)^n\Big)^m\Big].$$
+
+Next, we can compute the probability that the GCD of $m$ products of random positive integers at most $N$ are not divisible by primes in $X_l$:
+$$\frac{T(l, N)}{N^{nm}} = \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \frac{1}{N}\Big\lfloor\frac{N}{p_i}\Big\rfloor\Big)^n\Big)^m\Big].$$
+
+Now, we remove the presence of the floor functions by using Lemma above. This yields
+\begin{align*} \frac{T(l, N)}{N^{nm}} &= \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \Big(\frac{1}{p_i} + O\Big(\frac{1}{N}\Big)\Big) \Big)^n\Big)^m\Big]\\
+&= \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big] + O\Big(\frac{1}{N^{nm}}\Big).\end{align*}
+
+\noindent Letting $N \to \infty$ now gives us the desired result. $\blacksquare$
+\end{proof}
+
+So far, we have found the probability that the GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this GCD is $B$-friable.
+
+\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big].$$
+\end{theorem}
+
+\begin{proof}
+Define $g_N(l) = \frac{T(l-1, n) - T(l, n)}{N^{mn}}$ where $T(0, N) = N^{mn}$. Then, we see that $g_N(l)$ is precisely the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is coprime to $p_1, ..., p_{l-1}$ and divisible by $p_l$ for uniformly and independently chosen $r_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
+$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k).$$
+In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{p_l^m}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
+
+We start by showing that $g_N(l)$ is bounded. First of all, observe that
+$$g_N(l) \leq \text{Pr}\Big(p_l \Big| \gcd\Big(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj}\Big)\Big).$$
+Computing the numerator to the probability on the last line, we find that
+\begin{align*} 
+\Big|\{(r_{ij}) : p_l \mid \prod_{j=1}^n r_{1j}\Big|^m &= \frac{(N^n - |\{(r_{1j}) : p_l \nmid \prod_{j=1}^n r_{1j}\}|)^m}{N^{mn}}\\
+&= \frac{(N^n - |\{r_{11} : p_l \nmid r_{11}\}|^n)^m}{N^{mn}}. \end{align*}
+Therefore, it follows that
+\begin{align*} 
+g_N(l) &\leq \frac{(N^n - |\{r_{11} : p_l \nmid r_{11}\}|^n)^m}{N^{mn}}\\
+&= \Big[1 - \Big(1 - \frac{1}{N} \Big\lfloor \frac{N}{p_l}\Big\rfloor\Big)^n\Big]^m\\
+&\leq \Big[1 - \Big(1 - \frac{1}{p_l}\Big)^n\Big]^m\\
+&\leq \frac{n^m}{p_l^m},\end{align*}
+where the last inequality directly follows from Bernoulli's inequality. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a convergent $p$-series (noting that $m \geq 2$):
+$$\sum_{l=1}^{\infty} g(l) = n^m \sum_{l=1}^{\infty} \frac{1}{p_l^m} < n^m \sum_{j=1}^{\infty} \frac{1}{j^m}.$$
+
+Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{k=1}^l g_N(k)$ is a telescoping sum, we obtain
+$$\sum_{k=1}^l g_N(k) = \sum_{k=1}^l \frac{T(k-1, n) - T(k, n)}{N^{mn}} = 1 - \frac{T(l,N)}{N^{mn}},$$ 
+and thus
+$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big].$$
+
+\noindent Then since $\displaystyle \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
+\end{proof}
+
+Having derived the probability that the GCD of products of randomly chosen positive integers is $B$-friable, we now find more convenient bounds for this product representation.
+
+\begin{theorem} The probability that $\gcd(\prod_{j=1}^n r_{1j}, ..., \prod_{j=1}^{n}r_{mj})$ is $B$-friable is bounded above by 
+$$\frac{1}{\zeta(m)}\prod_{p\leq B}\Big(1-\frac{1}{p^m}\Big)^{-1},$$
+and is bounded below by 
+$$\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m\Big] \cdot \prod_{\hat{n}<p\leq\hat{r}} \Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \frac{1}{\zeta(s)},$$
+where $\hat{n}=\max\{n,B\}$, $\hat{r}=\max\{\hat{n}, \lfloor n^{\frac{m}{m-1}}+1\rfloor\}$, and $s = m(1 - \log_{\hat{r}}{n}) > 1$.
+\end{theorem} 
+
+\noindent \textbf{Remark:} It is understood that for the lower bound, the first finite product is equal to 1 if $B = \hat{n}$, and the second finite product is equal to 1 if $\hat{n}=\hat{r}$.
+ 
+\begin{proof}
+We start by deriving the upper bound. Since $(1 - \frac{1}{p})^n$ decreases as a function of $n$ due to $1 - \frac{1}{p} \in (0, 1)$, we obtain
+$$\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big] \leq \prod_{p>B} \Big(1 - \frac{1}{p^m}\Big) = \frac{1}{\zeta(m)} \prod_{p\leq B} \Big(1 - \frac{1}{p^m}\Big)^{-1},$$
+where the rightmost equality uses the infinite product representation of the Riemann Zeta function.
+
+\vspace{.1 in}
+
+Next, we derive the lower bound for our probabilistic expression. We start by splitting the product at $\hat{n}$. Then we apply Bernoulli's inequality in the form $(1 - x)^n \geq 1 - x$ where $x \in [0, 1]$ and $n \geq 1$, where we take $x = \frac{1}{p}$ where $p > \hat{n}$ is a prime number. This yields 
+$$\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big] \geq \prod_{B<p\leq \hat{n}}\Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big] \cdot \prod_{p>\hat{n}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big).$$
+
+\vspace{.1 in}
+
+It remains to find a lower bound for $\prod_{p>\hat{n}} (1 - (\frac{n}{p})^m)$. From using the definition of $s$, we see that $p \geq \hat{r}$ is equivalent to $(\frac{n}{p})^m \leq \frac{1}{p^s}$. Using this fact in conjunction to the infinite product representation for the Riemann zeta function, we obtain 
+\begin{align*} \prod_{p>\hat{n}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) &= \prod_{\hat{n}< p \leq \hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \prod_{p>\hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big)\\ &\geq  \prod_{\hat{n}< p \leq \hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \prod_{p>\hat{r}}\Big(1 - \frac{1}{p^s}\Big)\\ &\geq  \prod_{\hat{n}< p \leq \hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \frac{1}{\zeta(s)}. \end{align*}
+The claimed lower bound now directly follows. 
+
+\vspace{.1 in}
+
+It remains to show that $s > 1$. To this end, observe that since $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$ and $\hat{r} = \max\{n, B, r\}$, we have $\hat{r} \geq r > n^{\frac{m}{m-1}}$. Hence, we conclude that $s = m(1 - \log_{\hat{r}}{n}) > 1$ as required.
+\end{proof}
+	 
+%Remark 2.4 from paper goes here, blocked by derivation of $s$
+%\todo[inline]{Search your feelings, you know \(s=m(1-\log_{\hat{r}}n)\) to be true.}
+
+\subsection{Alternative proof with Inclusion-Exclusion}
 
 \begin{theorem}
 Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. If $X_l = \{p_1, p_2, ..., p_l\}$, then
@@ -367,19 +475,8 @@ T(l, N) &= \sum_{P\subset X_l}{(-1)^{|P|}}\Bigg|\Big\{(r_{ij}):\prod_{p\in P} p 
 $$T(l,N)=\sum_{P\subset X_l}{(-1)^{|P|}}\Bigg[\sum_{Q\subset P}(-1)^{|Q|}\Big(\sum_{R\subset Q}(-1)^{|R|}\Big\lfloor\frac{N}{\prod_{p\in R} p}\Big\rfloor\Big)^n\Bigg]^m.$$
 \end{proof}
 
-\begin{lemma} If $n$ and $k$ are positive integers, then
-$$\frac{1}{n} \Big\lfloor \frac{n}{k} \Big\rfloor = \frac{1}{k} + O\Big(\frac{1}{n}\Big).$$
-\end{lemma}
 
-\begin{proof}
-Since we know by definition of the floor function that $0 \leq x - \lfloor x \rfloor < 1$ for any real number $x$, we can write
-$$0 \leq \frac{n}{k} - \Big\lfloor \frac{n}{k} \Big\rfloor < 1.$$
-Then, rearranging this inequality and dividing all three parts by $n$ yields
-$$0 \leq \frac{1}{k} - \frac{1}{n}\Big\lfloor \frac{n}{k}\Big\rfloor < \frac{1}{n}.$$
-The claim now directly follows.
-\end{proof}
-
-\begin{theorem} The probability of the GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by \label{probability-random-first-l}
+\begin{theorem} The probability of the GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by 
 $$\lim_{N\to\infty} \frac{T(l,N)}{N^{nm}} = \prod_{i=1}^{l} \Big(1 - \Big[1 - \Big(1-\frac{1}{p^i}\Big)^n\Big]^m\Big).$$
 \end{theorem}
 
@@ -397,126 +494,9 @@ By the work done in the section so far, we see that $\displaystyle \frac{T(l,N)}
 	
 \noindent Finally, taking the limit as $N \to \infty$ yields the desired conclusion.
 \end{proof}
-%%%%%%%%%%%%%%%%%%%%
 
-\noindent \textbf{Remark:} Here is an alternative proof. 
-
-\vspace{.1 in}
-
-\noindent Note that for any prime $p$, there are $(N - \lfloor\frac{N}{p}\rfloor)^n$ products of $n$ positive integers each of which is at most $N$ that are not divisible by $p$. Hence, there are $N^n - (N - \lfloor\frac{N}{p}\rfloor)^n$ products of $n$ positive integers each of which is at most $N$ where at least one of them is divisible by $p$. Therefore, there are 
-$$N^{mn} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p}\Big\rfloor\Big)^n\Big)^m$$
-$m$-tuples of products of $n$ positive integers each of which is at most $N$ that are not divisible by $p$.
-
-Then, since divisibility by finitely many primes are independent events, we conclude that
-$$T(l, N) = \prod_{i=1}^l \Big[N^{nm} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p_i}\Big\rfloor\Big)^n\Big)^m\Big].$$
-
-Next, we can compute the probability that the GCD of $m$ products of random positive integers at most $N$ are not divisible by primes in $X_l$:
-$$\frac{T(l, N)}{N^{nm}} = \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \frac{1}{N}\Big\lfloor\frac{N}{p_i}\Big\rfloor\Big)^n\Big)^m\Big].$$
-
-Now, we remove the presence of the floor functions by using the Lemma above. This yields
-\begin{align*} \frac{T(l, N)}{N^{nm}} &= \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \Big(\frac{1}{p_i} + O\Big(\frac{1}{N}\Big)\Big) \Big)^n\Big)^m\Big]\\
-&= \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big] + O\Big(\frac{1}{N^{nm}}\Big).\end{align*}
-
-\noindent Letting $N \to \infty$ now gives us the desired result. $\blacksquare$
-%%%%%%%%%%%%%%%%%%%%
-\vspace{.2 in}
-
-\cref{probability-random-first-l} gives the probability that the GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this GCD is $B$-friable.
-
-\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
-$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big].$$
-\end{theorem}
-
-\begin{proof}
-Define $g_N(l) = \frac{T(l-1, n) - T(l, n)}{N^{mn}}$ where $T(0, N) = N^{mn}$. Then, we see that $g_N(l)$ is precisely the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is coprime to $p_1, ..., p_{l-1}$ and divisible by $p_l$ for uniformly and independently chosen $r_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
-$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k).$$
-In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{p_l^m}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
-
-We start by showing that $g_N(l)$ is bounded. First of all, observe that
-$$g_N(l) \leq \text{Pr}\Big(p_l \Big| \gcd\Big(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj}\Big)\Big).$$
-Computing the numerator to the probability on the last line, we find that
-\begin{align*} 
-\Big|\{(r_{ij}) : p_l \mid \prod_{j=1}^n r_{1j}\Big|^m &= \frac{(N^n - |\{(r_{1j}) : p_l \nmid \prod_{j=1}^n r_{1j}|)^m}{N^{mn}}\\
-&= \frac{(N^n - |\{r_{11} : p_l \nmid r_{11}|^n)^m}{N^{mn}}. \end{align*}
-Therefore, it follows that
-\begin{align*} 
-g_N(l) &\leq \frac{(N^n - |\{r_{11} : p_l \nmid r_{11}|^n)^m}{N^{mn}}\\
-&= \Big[1 - \Big(1 - \frac{1}{N} \Big\lfloor \frac{N}{p_l}\Big\rfloor\Big)^n\Big]^m\\
-&\leq \Big[1 - \Big(1 - \frac{1}{p_l}\Big)^n\Big]^m\\
-&\leq \frac{n^m}{p_l^m},\end{align*}
-where the last inequality directly follows from Bernoulli's inequality. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a convergent $p$-series (noting that $m \geq 2$):
-$$\sum_{l=1}^{\infty} g(l) = n^m \sum_{l=1}^{\infty} \frac{1}{p_l^m} < n^m \sum_{j=1}^{\infty} \frac{1}{j^m}.$$
-
-Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{k=1}^l g_N(k)$ is a telescoping sum, we obtain
-$$\sum_{k=1}^l g_N(k) = \sum_{k=1}^l \frac{T(k-1, n) - T(k, n)}{N^{mn}} = 1 - \frac{T(l,N)}{N^{mn}},$$ 
-and thus
-$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big].$$
-
-\noindent Then since $\displaystyle \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
-\end{proof}
-
-Having derived the probability that the GCD of products of randomly chosen positive integers is $B$-friable, we now find more convenient bounds for this product representation.
-
-\begin{theorem} Let $\hat{n}=\max\{n,B\}$, $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$, and $\hat{r}=\max\{\hat{n},r\}$. The probability that $\gcd(\prod_{j=1}^n r_{1j}, ..., \prod_{j=1}^{n}r_{mj})$ is $B$-friable is bounded above by 
-$$\frac{1}{\zeta(m)}\prod_{p\leq B}\Big(1-\frac{1}{p^m}\Big)^{-1},$$
-and is bounded below by 
-$$\prod_{B<p\leq\hat{n}} \Big(1 - \Big[1 - \Big(1 - \frac{1}{p}\Big)^n \Big]^m\Big) \cdot \prod_{\hat{n}<p\leq\hat{r}} \Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \frac{1}{\zeta(s)}.$$
-For the lower bound, $s = m(1 - \log_{\hat{r}}{n}) > 1$, the first finite product is equal to 1 if $B = \hat{n}$, and the second finite product is equal to 1 if $\hat{n}=\hat{r}$.
-\end{theorem} 
- 
-\begin{proof}
-Since $(1 - \frac{1}{p})^n$ decreases as a function of $n$, we see that $$\prod_{p>B} \Big(1 - \Big[1 - \Big(1 - \frac{1}{p}\Big)^n \Big]^m \Big)$$
-is decreases as a function of $n$. Therefore, we obtain the upper bound 
-$$\prod_{B<p\leq\hat{n}} \Big(1 - \Big[1 - \Big(1 - \frac{1}{p}\Big)^n \Big]^m \Big) \leq \prod_{p>B} \Big(1 - \frac{1}{p^m}\Big) = \frac{1}{\zeta(m)} \prod_{p\leq B} \Big(1 - \frac{1}{p^m}\Big)^{-1},$$
-where the rightmost equality uses the infinite product representation of the Riemann Zeta function.
-
-Next, we derive the lower bound for our probabilistic expression. By Bernoulli's inequality, $(1 - \frac{n}{p})^n \leq 1 - \frac{n}{p}$. If $p>n$, then the entire expression is less than 1. Thus if we set $p>\max\{n,B\}=\hat{n}$, then we can always satisfy this condition. Therefore, $\prod_{B<p\leq\hat{n}} (1-[1-(1-\frac{1}{p})^n]^m)$ is bounded below by the quantity 
-$$\prod_{B<p\leq \hat{n}}\Big(1-\Big[1-\Big(1-\frac{1}{p}\Big)^n\Big]^m\Big)\cdot\prod_{p>\hat{n}}\Big[1-\Big(\frac{n}{p}\Big)^m\Big].$$
-		
-\todo[inline]{Scratch pad, involving solving for S, see prof. email}
-		
-Next, \(\prod_{\hat{n}<p\leq\hat{r}}\bigr[1-\bigl(\frac{n}{p}\bigr)^m\bigr] < 1 \) since \(p>n\) and \(
-\prod_{p>\hat{r}}(1-\frac{1}{p^s})<1\). Thus, we conclude that \begin{align}
-	 	&\prod_{B<p\leq\hat{n}}\Big(1-\Big[1-\Big(1-\frac{1}{p}\Big)^n\Big]^m\Big)\\ &\geq \prod_{B<p\leq \hat{n}}\Big(1-\Big[1-\Big(1-\frac{1}{p}\Big)^n \Big]^m\Big) \cdot \prod_{p>\hat{n}}\Big[1 - \Big(\frac{n}{p}\Big)^m\Big] \cdot \prod_{p>\hat{r}}\Big(1-\frac{1}{p^s}\Big)\\ &>
-	 	\prod_{p>\hat{n}} \Big[1-\Big(\frac{n} {p} \Big)^m \Big]\cdot \prod_{p>\hat{r}}\frac{1}{\zeta(s)},
-\end{align} and this covers all cases for \(p>B\). 
-	 
-\begin{theorem}
-Remark 2.4 from paper goes here, blocked by derivation of $s$
-\todo[inline]{Search your feelings, you know \(s=m(1-\log_{\hat{r}}n)\) to be true.}
-\end{theorem} 
-	 
-\end{proof}
-
-\subsection{Scratchpad}
-	"We can easily check that \(\frac{n^m}{p^m}\leq \frac{1}{p^s}\)" 
-	
-	Can't seem to figure it out.
-	Not even sure why this is needed.
-	Solving with logs gets close, but can't deal with the denominator.
-
-	\begin{theorem}
-		Let \(s=m(1-\log_{\hat{r}}n)\). Then, \(s>1\) whenever \(0\leq n\leq\hat{r}=\max\{n,B,r\}\). 
-	\end{theorem}
-	\begin{proof}
-		\(\log_{\hat{r}}n<1\) whenever \(0\leq n\leq\hat{r}=\max\{n,B,r\}\).
-		and for positive integer \(m\geq 2\),
-		then \(m(1-\log_{\hat{r}}n)>1\). 
-	\end{proof}
-
-	\begin{theorem}
-		$\hat{r}\geq r > n^{{\frac{m}{m-1}}}$
-	\end{theorem}
-	\begin{proof}
-		Let $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$
-		Then using the definition of floor, $r\geq n^{\frac{m}{m-1}}\geq r-1$
-		
-		Next, $\max\{n,B,r\} = \hat{r} \geq r \geq n^{\frac{m}{m-1}}\geq r-1$. 
-	\end{proof}
-
-
+%%%%%%%%%%%%%%%%%%%%%%
 \section{Generalization to  \texorpdfstring{\(k\)}{\mathbb{k}}-gcd}
-
 
 \begin{definition} Fix a positive integer $k$. The \textbf{$k$-gcd} of $n$ nonzero integers $x_1, ..., x_n$, written $\gcd_k(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{th}$ power divides each of $x_1, x_2, ..., x_n$.
 \end{definition}	
@@ -598,7 +578,7 @@ Suppose that $p \mid a$ where $a = \gcd_k(\prod_{j=1}^n r_{1j}, ...,\prod_{j=1}^
 		  	 \prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr)
 		  \end{align}
 		  
-		  Finally, invoking an earlier result,  \todo[inline]{reference}
+		  Finally, invoking an earlier result yields
 		  \begin{align}
 		  	\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl[\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr)=\\
 		  	 \prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl(1+\frac{_nH_1}{p}+\mathellipsis+\frac{_nH_{k-1}}{p^{k-1}}\Biggr)\Biggr]+O\Biggl(\frac{1}{N}\Biggr)
@@ -607,10 +587,14 @@ Suppose that $p \mid a$ where $a = \gcd_k(\prod_{j=1}^n r_{1j}, ...,\prod_{j=1}^
 		  Finally, substitute these results into the original expression and repeatedly apply (\cref{alternating-sum-to-prod}): to simplify as in an earlier result, and let \(N\to \infty\), and the error approaches 0. 
 	\end{proof}
 
-	\todo[inline]{What to do with last page? Not a lot  of room for proofs, and the $s$ that I couldn't prove is invoked again.}
+\todo[inline]{What to do with last page? Not a lot  of room for proofs, and the $s$ that I couldn't prove is invoked again.}
 
-	\section{Benkoski's Theorem on Algebraic Integers}
-	
+\section{Benkoski's Theorem on Algebraic Integers}
+
+\subsection{Background material}
+
+%Cite where we can find more background and details as needed here!
+ 
 	\begin{definition} A complex number is an \textbf{algebraic number} if it satisfies a polynomial with rational coefficients.
 	\end{definition}
 
@@ -625,15 +609,16 @@ Suppose that $p \mid a$ where $a = \gcd_k(\prod_{j=1}^n r_{1j}, ...,\prod_{j=1}^
 	\begin{definition} 
 		We say that an ideal \(\f{p}\) in a number ring $\mathcal{O}$ is \textbf{prime} if whenever \(\f{ab}\subseteq \f{p}\) for some ideals \(\f{a},\f{b}\) in $\mathcal{O}$ implies \(\f{a}\subseteq \f{p}\) or \(\f{b} \subseteq \f{p}\).  
 	\end{definition}
-\todo[inline]{An ideal of a Dedekind domain enjoys unique factorization into prime ideals}
-	\begin{definition} \label{ideal-norm}
+A key result is that a nonzero ideal in a Dedekind domain (such as a number ring) enjoys unique factorization into prime ideals. 
+
+\begin{definition} \label{ideal-norm}
 		Let $\mathfrak{a}$ be a nonzero ideal of a number ring $\mathcal{O}$. We
 		define the \textbf{norm} of \(\f{a}\) as \(\f{N(a)}:=|\mathcal{O}/\f{a}|\).
 	\end{definition}
 
-	The norm on ideals can be shown to be finite. \cite{marcus_number_2012} 
+The norm on ideals can be shown to be finite. \cite{marcus_number_2012} 
 	
-	\begin{definition} Let \(\mathcal{O}\) be an algebraic number ring. The \textbf{Dedekind Zeta Function} of \(\mathcal{O}\) is given by \begin{equation}
+\begin{definition} Let \(\mathcal{O}\) be an algebraic number ring. The \textbf{Dedekind Zeta Function} of \(\mathcal{O}\) is given by \begin{equation}
 			\zeta_\mathcal{O}(s)=\sum_{\f{a\subseteq \mathcal{O}}}\frac{1}{\f{N(a)}}
 		\end{equation} where the sum is over all non-zero ideals of \(\mathcal{O}\).
 	\end{definition}
@@ -685,11 +670,13 @@ As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all 
 	\begin{theorem} There is a positive constant \(c\) such that \(H(n)=cn+O(n^{1-\epsilon})\) where \(\epsilon = [K : \mathbb{Q}]^{-1}\) \label{H-estimate}. If \(K=\mathbb{Q}\), as in the case for the integers, then \(H\) reduces to the floor function.
 	\end{theorem}
 	\begin{proof}
-	    Refer to Marcus, \cite{marcus_number_2012}.
+	    Refer to \cite{marcus_number_2012}.
 	\end{proof}
-	
+
+\subsection{Benkoski's Theorem for a number ring}
+
 	The following theorem describes the probability that random algebraic integers are relatively \(r\)-prime.
-	\begin{theorem}[Benkoski's Theorem for Algebraic Number Rings]
+	\begin{theorem}[Benkoski's Theorem for an Algebraic Number Ring]
 		Let \(Q(n)\) denote the number of ordered \(k\)-tuples of ideals in \(\mathcal{O}\) with norm less than or equal \(n\) that are relatively prime.
 		Fix \(k,r\in\mathbb{N}\) not both equal to \(1\). Then, \[\lim\limits_{n\to\infty}\frac{Q(n)}{H(n)^k}=\frac{1}{\zeta_\mathcal{O}(rk)}\]
 	\end{theorem}
@@ -772,8 +759,7 @@ As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all 
 	&=\sum_{\f{a}}O\left(\left|\mu(\f{a})\right|\left|\left(\frac{cn}{\f{N}(\f{a})^r}\right)^{k-1}\right|\frac{n}{\f{N}(\f{a})^r}\right)^{1-\epsilon}\notag\\
 	&=\sum_{\f{a}}O\left(\left|\mu\left(\f{a}\right)\right|\right)O\left(|c|\right)O\left(\frac{n}{\f{N}(\f{a})^r}\right)^{k-\epsilon}\notag\\
 	&=\sum_{\f{a}}O\left(\frac{n^{k-\epsilon}}{\f{N}(\f{a})^{r(k-\epsilon)}}\right)\notag\\
-	&=\sum_{\f{a}}O\left(|n^{k-\epsilon}|\right)O\left(\frac{1}{\f{N}(\f{a})^{r(k-\epsilon)}}\right)\\
-	&=O\left(|n^{k-\epsilon}|\right)\sum_{\f{a}}O\left(\frac{1}{\f{N}(\f{a})^{r(k-\epsilon)}}\right)
+	&= n^{k-\epsilon} \sum_{\f{a}}O\left(\frac{1}{\f{N}(\f{a})^{r(k-\epsilon)}}\right)
 	\end{align}
 
 	Applying our estimate for the norm and a Riemann integral, 
@@ -788,9 +774,9 @@ As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all 
 		\end{cases}
 	\end{align}
 
-	Thus we have, \todo[inline]{Add simplification details}
+	Thus we have
 	\begin{align}
-		Q(n)&=\frac{(cn)^k}{\zeta_{O}(rk)}+O(n^{(2-\epsilon)/r}) +O(|n^{k-\epsilon}|) \begin{cases}
+		Q(n)&=\frac{(cn)^k}{\zeta_{O}(rk)}+O(n^{(2-\epsilon)/r}) + n^{k-\epsilon} \cdot \begin{cases}
 			O(\ln n) & \text{if } r=1, k=2 \\
 			O(n^\frac{1}{r}) & \text{if } r\leq2, k=1 \\
 			O(n^{k-1}) & \text{otherwise}
@@ -815,17 +801,95 @@ As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all 
 	\end{equation}
 
 \section{B-Friable Algebraic Integers}
+\subsection{Main content}
 
 \begin{definition} Let $B$ be a fixed positive integer and an algebraic number ring $\mathcal{O}$. A nonzero ideal $\mathfrak{a}$ in $\mathcal{O}$ is \textbf{$B$-friable ($B$-smooth)} if $\mathfrak{a}$ has no prime divisor greater than $B$. 
 \end{definition}
 %Example
-For the remainder of this section, we are going to find the probability that the greatest common divisor (GCD) of $m$ products of $n$ nonzero ideals in an algebraic number ring $\mathcal{O}$ (all randomly chosen in a uniform and independent manner) is $B$-friable.
+For the remainder of this section, we are going to find the probability that the greatest common divisor (GCD) of $m$ products of $n$ nonzero ideals in an algebraic number ring $\mathcal{O}$ (all randomly chosen in a uniform and independent manner) is $B$-friable. 
 
 \vspace{.1 in}
 
 To this end, we fix a positive integer $N$. Then, we randomly choose uniformly and independently ideals $\mathfrak{a}_{ij}$ whose norms at most $N$ for each integer $1 \leq i \leq m$ and $1 \leq j \leq n$ where $m \geq 2$ and $n \geq 1$. Define $T(l,N)$ to be the number of ordered tuples $(\mathfrak{a}_{ij})$ such that 
 $$\gcd\Big(\prod_{j=1}^n \mathfrak{a}_{1j}, ..., \prod_{j=1}^n \mathfrak{a}_{mj}\Big)$$
-is coprime to the first $l$ prime ideals (arranged in non-decreasing order by norm) having norm greater than $B$. We start by finding a summation formula for $T(l,N)$.
+is coprime to the first $l$ prime ideals (arranged in non-decreasing order by norm) having norm greater than $B$. We start with the following error bound.
+
+\begin{lemma} If $k$ is a positive integer, then we have for all sufficiently large $n$
+$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big).$$
+%Where \epsilon is as in the Marcus estimate; cite!
+\end{lemma}
+
+\begin{proof}
+Since we know from \cite{marcus_number_2012} that $H(x) = cx + O(x^{1-\epsilon})$ for some constants $c, \epsilon > 0$, there exists a constant $A > 0$ such that for all sufficiently large $x$:
+$$|H(x) - cx| < Ax^{1-\epsilon}.$$
+By using this inequality, we deduce for all sufficiently large $n$ that
+$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) \leq \frac{\frac{cn}{k} + A(\frac{n}{k})^{1-\epsilon}}{cn - An^{1-\epsilon}} = \frac{\frac{cn}{k} (1 + \frac{Ak^{\epsilon}}{c} n^{-\epsilon})}{cn(1 - \frac{A}{c}n^{-\epsilon})}.$$
+Applying the geometric series to the right side of the inequality above, we obtain for all sufficiently large $n$:
+$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} \Big(1 + \frac{Ak^{\epsilon}}{c} n^{-\epsilon}\Big) \Big(1 + O\Big(\frac{1}{n^{\epsilon}}\Big)\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big),$$
+and that is what we wanted to prove.
+\end{proof}
+
+\begin{theorem}
+Fix positive integers $B$ and $N$ and a number ring $\mathcal{O}$. Let $\mathfrak{p}_1, \mathfrak{p}_2, ...$ be the prime ideals in $\mathcal{O}$ with norm greater than $B$ arranged in non-decreasing order by norm. Then, the probability of the GCD of products of random ideals is not divisible by the first $l$ prime ideals greater than $B$ is given by 
+$$\lim_{N\to\infty} \frac{T(l,N)}{N^{nm}} = \prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p^i}\Big)^n\Big)^m\Big].$$
+\end{theorem}
+
+\begin{proof}
+For any prime ideal $\mathfrak{p}$, there are $\bigl[H(N)-H\bigl(\frac{N}{\f{N(p)}}\bigr)\bigr]^n$ products of ideals with norm at most $N$ that are not divisible by $\f{N(p)}$. Hence, there are  $H(N)^n-\bigl[H(N)-H\bigl(\frac{N}{\f{N(p)}}\bigr)\bigr]^n$ products of ideals with norm at most \(N\) where at least one of them is divisible by $\f{N(p)}$. Therefore, there are 
+$$H(N)^{nm}-\Big[H(N)^n - \Big(H(N) - H\Big(\frac{N}{\f{N(p)}}\Big)\Big)^n\Big]^m$$
+ordered $m$-tuples of products of ideals, each of which has norm at most $N$ and is not divisible by $\f{N(p)}$.
+	
+Then since divisibility by finitely many primes yields independent events, we conclude that $$T(l,N)=\prod_{i=1}^{l} \Big[H(N)^{nm}- \Big(H(N)^n - \Big(H(N) - H\Big(\frac{N}{\f{N(p}_i)}\Big)\Big)^n \Big)^m \Big].$$
+	
+Next, we can compute the probability that the GCD of $m$ products of random ideals with norm at most $N$ are not divisible by the first $l$ prime ideals:
+$$\frac{T(l,N)}{H(N)^{nm}} = \prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1 - \frac{1}{H(N)} H\Big(\frac{N}{\f{N(p)}}\Big)\Big)^n \Big)^m \Big].$$
+	
+\noindent Using the estimate for $H(n)$ from \cite{marcus_number_2012} then gives us
+\begin{align}
+\frac{T(l,N)}{H(N)^{mn}}=\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)} + O\Big(\frac{1}{N^{\epsilon}}\Big) \Big)^n \Big)^m\Big]\\
+=\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)}\Big)^n \Big)^m \Big] + O\Big(\frac{1}{N^{\epsilon}}\Big).
+\end{align}
+Letting $N\to\infty$ now gives us the desired result. 
+\end{proof}
+
+Setting \(\mathcal{O}=\mathbb{Z}\), prime ideals are substituted for the prime integers, and \(c=1\), yields the same result as for the integers case. As in the case for the integers, this only provides the probability for the first \(l\) prime ideals greater than \(B\). Using the Lebesgue Dominated Convergence Theorem, we can take the limit as \(l\) approaches infinity.
+
+\begin{theorem}
+The probability that the GCD of products of random ideals of algebraic integers in a given number ring $\mathcal{O}$ is $B$-Friable converges to
+$$\prod_{\f{N}(\f{p})>B}\Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big].$$
+\end{theorem}
+
+\begin{proof}
+Define $g_N(l) = \frac{T(l-1, n) - T(l, n)}{H(N)^{mn}}$ where $T(0, N) = H(N)^{mn}$. Then, we see that $g_N(l)$ is precisely the probability that $\gcd(\prod_{j=1}^n \mathfrak{a}_{1j}, ... , \prod_{j=1}^n \mathfrak{a}_{mj})$ is coprime to $\mathfrak{p}_1, ..., \mathfrak{p}_{l-1}$ and divisible by $\mathfrak{p}_l$ for uniformly and independently chosen $\mathfrak{a}_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
+
+$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k).$$
+In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{\mathfrak{N}(\mathfrak{p}_l)^m}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
+
+We start by showing that $g_N(l)$ is bounded. First of all, observe that
+$$g_N(l) \leq \text{Pr}\Big(\mathfrak{p}_l \Big| \gcd\Big(\prod_{j=1}^n \mathfrak{a}_{1j}, ... , \prod_{j=1}^n \mathfrak{a}_{mj}\Big)\Big).$$
+Computing the numerator to the probability on the last line, we find that
+\begin{align*} 
+\Big|\{(r_{ij}) : \mathfrak{p}_l \mid \prod_{j=1}^n \mathfrak{a}_{1j}\}\Big|^m &= \frac{(H(N)^n - |\{(\mathfrak{a}_{1j}) : \mathfrak{p}_l \nmid \prod_{j=1}^n \mathfrak{a}_{1j}\}|)^m}{H(N)^{mn}}\\ &= \frac{(H(N)^n - |\{r_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}\}|^n)^m}{H(N)^{mn}}. \end{align*}
+Therefore, it follows for all sufficiently large $N$ that
+\begin{align*} 
+g_N(l) &\leq \frac{(H(N)^n - |\{r_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}\}|^n)^m}{H(N)^{mn}}\\ &\leq \Big(1 - \Big(1 - \frac{1}{H(N)} H\Big(\frac{N}{\f{N}(\f{p}_l)}\Big)\Big)^n\Big)^m\\
+&= \Big(1- \Big(1 - \Big(\frac{1}{\mathfrak{N}(\mathfrak{p}_l)} + \frac{A}{N^{\epsilon}}\Big)\Big)^n \Big)^m \text{ for some } A > 0\\ &\leq \Big(1- \Big(1 - \frac{2}{\mathfrak{N}(\mathfrak{p}_l)}\Big)^n \Big)^m, \end{align*}
+
+The latter expression is bounded above by $g(l) = \frac{(2n)^m}{\f{N(\f{p}_l)}^m}$ by Bernoulli's inequality in the form $1-(1-x)^t\leq xt$ for $t\geq 1$ and $0\leq x \leq 1$. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a constant multiple of the Dedekind zeta function (with $m \geq 2$):
+$$\sum_{l=1}^{\infty}g(l)\leq (2n)^m\sum_{l=1}^{\infty}\frac{1}{\f{N(\f{p}_l)}^m}\leq (2n)^m \zeta_{\mathcal{O}}(m) < \infty.$$
+
+Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{k=1}^l g_N(k)$ is a telescoping sum, we obtain
+$$\sum_{k=1}^l g_N(k) = \sum_{k=1}^l \frac{T(k-1, n) - T(k, n)}{H(N)^{mn}} = 1 - \frac{T(l,N)}{H(N)^{mn}},$$ 
+and thus
+$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = 1 - \prod_{\mathfrak{N}(\mathfrak{p}) > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\mathfrak{N}(\mathfrak{p})}  \Big)^n\Big)^m\Big].$$
+
+\noindent Since $\displaystyle \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Alternative proof with Inclusion-Exclusion}
 
 \begin{theorem} Fix positive integers $B$ and $N$, and let $\mathfrak{p}_1, \mathfrak{p}_2, ...$ be the prime ideals in $\mathcal{O}$ with norm greater than $B$ arranged in non-decreasing order by norm. If $X_l = \{\mathfrak{p}_1, \mathfrak{p}_2, ..., \mathfrak{p}_l\}$, then
 $$T(l,N) = \sum_{P\subset X_l}(-1)^{|P|} \Big(\sum_{Q\subset P} (-1)^{|Q|} \Big[\sum_{R\subset Q}(-1)^{|R|} H\Big(\frac{N}{\f{N}\Big(\prod_{\f{p}\in R}\f{p}\Big)} \Big) \Big]^n \Big)^m.$$
@@ -849,27 +913,12 @@ By the inclusion exclusion principle,
 	\end{equation}
 	\end{proof}
 
-\begin{lemma} If $k$ is a positive integer, then we have for all sufficiently large $n$
-$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big).$$
-%Where \epsilon is as in the Marcus estimate; cite!
-\end{lemma}
-
-\begin{proof}
-Since we know from Marcus that $H(x) = cx + O(x^{1-\epsilon})$ for some constants $c, \epsilon > 0$, there exists a constant $A > 0$ such that for all sufficiently large $x$:
-$$|H(x) - cx| < Ax^{1-\epsilon}.$$
-Then, we obtain
-$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) \leq \frac{\frac{cn}{k} + A(\frac{n}{k})^{1-\epsilon}}{cn - An^{1-\epsilon}}.$$
-By the geometric series, we see that
-$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big),$$
-and that is what we wanted to prove.
-\end{proof}
 
 
-	\begin{theorem}[Probability that the GCD of products of random integers is \(B\)-Friable for first \(l\) primes]
-		\begin{equation}
-			\lim\limits_{N\to\infty}\frac{T(l,N)}{H(N)^{mn}} =\prod_{i=1}^{l}\Biggr[1-\Biggr\{1-\Biggl(1-\frac{1}{\f{N}(\f{p}_i)}\Biggr)^n\Biggr\}^m\Biggr]
-		\end{equation}
-	\end{theorem}
+
+\begin{theorem} The probability of the GCD of products of random ideals in a number ring $\mathcal{O}$ is not divisible by the first $l$ prime ideals greater than $B$ is given by
+$$\lim\limits_{N\to\infty}\frac{T(l,N)}{H(N)^{mn}} =\prod_{i=1}^{l}\Big[1-\Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big)^m\Big].$$
+\end{theorem}
 
 	\begin{proof}
 	As in the case for the integers, we begin by multiplying \(\frac{1}{N^{mn}}\) into the innermost sum.
@@ -902,61 +951,29 @@ and that is what we wanted to prove.
 	Next, since \(P\subset X_l \subset \mathcal{P}(\f{p}_1,\f{p}_2,\mathellipsis,\f{p}_l)\), we use multiple applications of \cref{alternating-sum-to-prod},
 		$$\frac{T(l,N)}{H(N)^{mn}}=\prod_{i=1}^{l}\Biggr[1-\Biggr\{1-\Biggl(1-\frac{1}{\f{N}(\f{p}_i)}\Biggr)^n\Biggr\}^m\Biggr] + O\Big(\frac{1}{N^{\epsilon}}\Big).$$
 		
-	Finally taking the limit, we conclude that
-	$$\lim_{N\to\infty} \frac{T(l,N)}{H(N)^{mn}} = \prod_{i=1}^{l}\Big[1-\Big\{1-\Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big\}^m\Big].$$
+\noindent Finally letting $N \to \infty$, we conclude that
+$$\lim_{N\to\infty} \frac{T(l,N)}{H(N)^{mn}} = \prod_{i=1}^{l}\Big[1-\Big\{1-\Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big\}^m\Big].$$
+
 \end{proof}
 
-\noindent \textbf{Remark:} Here is an alternative proof. 
-
-\vspace{.1 in}
-	\noindent For any prime ideal $\mathfrak{p}$, there are $\bigl[H(N)-H\bigl(\frac{N}{\f{N(p)}}\bigr)\bigr]^n$ products of ideals with norm at most $N$ that are not divisible by $\f{N(p)}$. Hence, there are  $H(N)^n-\bigl[H(N)-H\bigl(\frac{N}{\f{N(p)}}\bigr)\bigr]^n$ products of ideal with norm at most \(N\) where at least one of them is divisible by $\f{N(p)}$. Therefore, there are $$H(N)^{nm}-\biggl(H(N)^n-\biggl[H\bigl(N\bigl)-H\biggl(\frac{N}{\f{N(p)}}\biggl)\biggl]^n\biggl)^m$$ $m$-tuples of products of positive integers each of which has norm at most $N$ and not divisible by $\f{N(p)}$.
+\section{k-gcd prototype}
+For any fixed \(k\geq 1\), prime \(p\), and sufficiently large integer \(N\geq 0\):
+	\begin{enumerate}
+		\item There are \(\lfloor \frac{N}{p} \rfloor\) positive integers at most \(N\) and divisible by \(p\).
+		\item There are \(N-\lfloor \frac{N}{p} \rfloor\) positive integers at most \(N\) and not divisible by \(p\).
+		\item There are \((N-\lfloor \frac{N}{p} \rfloor)^n\) products of \(n\) positive integers each of which is at most \(N\) and not divisible by \(p\).
+		\item There are \(nH_k=\binom{n+k-1}{k}\) integer solutions to \(p^k=p^{x_1}p^{x_2}\mathellipsis p^{x_n}\).
+		\item There are \(\sum_{a=0}^{k-1}\lfloor\frac{N}{p^a}\rfloor_nH_a\) ways to write a product of \(n\) positive integers at most \(N\) that is divisible by a non negative integer power of \(p\) up to \(k-1\).
+		\item There are \((N-\lfloor \frac{N}{p} \rfloor)^n(\sum_{a=0}^{k-1}\lfloor\frac{N}{p^a}\rfloor_nH_a)\) ways to write products of \(n\) positive integers each of which is at most \(N\) and not divisible by a non negative integer power of \(p\) up to \(k-1\).
+		\item There are \(N^n-[(N-\lfloor \frac{N}{p} \rfloor)^n(\sum_{a=0}^{k-1}\lfloor\frac{N}{p^a}\rfloor_nH_a)]\) ways to write products of \(n\) positive integers each of which is at most \(N\) and and at least one of them is divisible by a non negative integer power of \(p\) up to \(k-1\).
+		\item There are \(N^{mn}-(N^n-[(N-\lfloor \frac{N}{p} \rfloor)^n(\sum_{a=0}^{k-1}\lfloor\frac{N}{p^a}\rfloor_nH_a)])^m\), ways to write \(m\)-tuples of products of \(n\) positive integers each of which is at most \(N\) and not divisible by a non negative integer power of \(p\) up to \(k-1\).
+	\end{enumerate}
+	Since divisibility by finitely many primes are independent events, we conclude that, \[T(l,N)=\prod_{i=1}^{l}[N^{mn}-(N^n-[(N-\lfloor \frac{N}{p_i} \rfloor)^n(\sum_{a=0}^{k-1}\lfloor\frac{N}{p_i^a}\rfloor_nH_a)])^m]\]
 	
-	Then, since divisibility by finitely many norms are independent events, we conclude that $$T(l,N)=\prod_{i=1}^{l}\biggl[H(N)^{nm}-\biggl(H(N)^n-\biggl[H\bigl(N\bigl)-H\biggl(\frac{N}{\f{N(p}_i)}\biggl)\biggl]^n\biggl)^m\biggr].$$
-	
-	Next, we can compute the probability that the GCD of \(m\) products of random ideals with norm at most \(N\) are not divisible by primes in \(X_l\):
-	 $$\frac{T(l,N)}{H(N)^{nm}}=\prod_{i=1}^{l}\biggl[1-\biggl(1-\biggl[1-\frac{1}{H(N)}H\biggl(\frac{N}{\f{N(p)}}\biggr)\biggl]^n\biggr)^m\biggr].$$
-	
-	Next, we remove the class group function, \(H\), using [MARCUS ESTIMATE]. This yields
-	\begin{align}
-		\frac{T(l,N)}{H(N)^{mn}}=\prod_{i=1}^{l}\biggr[1-\biggr(1-\biggl[1-\frac{1}{\f{N}(\f{p}_i)}+O\biggl(\frac{1}{N^{\epsilon}}\biggl)\biggr]^n\biggr)^m\biggr]\\
-		=\prod_{i=1}^{l}\biggr[1-\biggr(1-\biggl(1-\frac{1}{\f{N}(\f{p}_i)}\biggr)^n\biggr)^m\biggr] + O\Big(\frac{1}{N^{\epsilon}}\Big),
-	\end{align}
-	for some constant \(\epsilon > 0\).
-	Letting \(N\to\infty\) now gives us the desired result. $\qed$\newline
+	Next, we can compute the probability that the GCD of \(m\) products of random positive integers at most \(N\) are not divisible by primes in  \(X_l\): \[\frac{T(l,N)}{N^{mn}}=\prod_{i=1}^{l}[1-(1-[(1-\frac{1}{N}\lfloor \frac{N}{p_i} \rfloor)^n(\sum_{a=0}^{k-1}\lfloor\frac{N}{p_i^a}\rfloor_nH_a)])^m]\]
 
-Setting \(\mathcal{O}=\mathbb{Z}\), prime ideals are substituted for the prime integers, and \(c=1\), yields the same result as for the integers case. As in the case for the integers, this only provides the probability for the first \(l\) prime ideals greater than \(B\). Using the Lebesgue Dominated Convergence Theorem, we can take the limit as \(l\) approaches infinity.
-
-\begin{theorem}
-The probability that the GCD of products of random ideals of algebraic integers is $B$-Friable converges to
-$$\prod_{\f{N}(\f{p})>B}\Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big].$$
-\end{theorem}
-
-\begin{proof}
-Define $g_N(l) = \frac{T(l-1, n) - T(l, n)}{H(N)^{mn}}$ where $T(0, N) = H(N)^{mn}$. Then, we see that $g_N(l)$ is precisely the probability that $\gcd(\prod_{j=1}^n \mathfrak{a}_{1j}, ... , \prod_{j=1}^n \mathfrak{a}_{mj})$ is coprime to $\mathfrak{p}_1, ..., \mathfrak{p}_{l-1}$ and divisible by $\mathfrak{p}_l$ for uniformly and independently chosen $\mathfrak{a}_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
-
-$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k).$$
-In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{\mathfrak{N}(\mathfrak{p}_l)^m}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
-
-We start by showing that $g_N(l)$ is bounded. First of all, observe that
-$$g_N(l) \leq \text{Pr}\Big(\mathfrak{p}_l \Big| \gcd\Big(\prod_{j=1}^n \mathfrak{a}_{1j}, ... , \prod_{j=1}^n \mathfrak{a}_{mj}\Big)\Big).$$
-Computing the numerator to the probability on the last line, we find that
-\begin{align*} 
-\Big|\{(r_{ij}) : \mathfrak{p}_l \mid \prod_{j=1}^n \mathfrak{a}_{1j}\Big|^m &= \frac{(H(N)^n - |\{(\mathfrak{a}_{1j}) : \mathfrak{p}_l \nmid \prod_{j=1}^n \mathfrak{a}_{1j}|)^m}{H(N)^{mn}}\\ &= \frac{(H(N)^n - |\{r_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}|^n)^m}{H(N)^{mn}}. \end{align*}
-Therefore, it follows that
-\begin{align*} 
-g_N(l) &\leq \frac{(H(N)^n - |\{r_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}|^n)^m}{H(N)^{mn}}\\ &\leq \Big(1 - \Big(1 - \frac{1}{H(N)} H\Big(\frac{N}{\f{N}(\f{p}_l)}\Big)\Big)^n\Big)^m\\
-&= \Big(1- \Big(1 - \Big(\frac{1}{\mathfrak{N}(\mathfrak{p}_l)} + \frac{A}{N^{\epsilon}}\Big)\Big)^n \Big)^m \text{ for some } A > 0\\ &\leq \Big(1- \Big(1 - \frac{2}{\mathfrak{N}(\mathfrak{p}_l)}\Big)^n \Big)^m, \end{align*}
-
-The latter expression is bounded above by $g(l) = \frac{(2n)^m}{\f{N(\f{p}_l)}^m}$ by Bernoulli's inequality in the form $1-(1-x)^t\leq xt$ for $t\geq 1$ and $0\leq x \leq 1$. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a constant multiple of the Dedekind zeta function (with $m \geq 2$):
-$$\sum_{l=1}^{\infty}g(l)\leq (2n)^m\sum_{l=1}^{\infty}\frac{1}{\f{N(\f{p}_l)}^m}\leq (2n)^m \zeta_{\mathcal{O}}(m) < \infty.$$
-
-Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{k=1}^l g_N(k)$ is a telescoping sum, we obtain
-$$\sum_{k=1}^l g_N(k) = \sum_{k=1}^l \frac{T(k-1, n) - T(k, n)}{H(N)^{mn}} = 1 - \frac{T(l,N)}{H(N)^{mn}},$$ 
-and thus
-$$\lim_{N \to \infty} \sum_{k=1}^{\infty} g_N(k) = 1 - \prod_{\mathfrak{N}(\mathfrak{p}) > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\mathfrak{N}(\mathfrak{p})}  \Big)^n\Big)^m\Big].$$
-
-\noindent Since $\displaystyle \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
-\end{proof}
+	Interesting: \url{https://en.wikipedia.org/wiki/Legendre%27s_formula} 
 
 \printbibliography
+
 \end{document}
