@@ -1061,6 +1061,70 @@ $$\lim_{N\to\infty} \frac{T(l,N)}{H(N)^{mn}} = \prod_{i=1}^{l}\Big[1-\Big\{1-\Bi
 
 \end{proof}
 
+\section{k-gcd number ring prototype}
+
+\begin{definition} Fix a positive integer $k$. The \textbf{$k$-gcd} of $n$ prime ideals $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$, written $\gcd_k(\f{a}_1,\f{a}_2, \mathellipsis,\f{a}_n)$, is the largest prime ideal whose $k^{\text{th}}$ power divides each of $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$.
+\end{definition}	
+
+\noindent Observe that when $k=1$, the $k$-gcd reduces to the classic gcd.
+
+\begin{lemma}
+	Fix positive integers $k$ and $N$. Let $Q_{\f{p}^k}(N)$ the number of ordered $n$-tuples of non zero ideals in which each entry has norm at most $N$ such that $\f{p}^k$ does not divide the product of these entries. Then, we have
+	$$Q_{\f{p}^k}(N) = \sum_{a_1+...+a_n < k} \Big[\prod_{j=1}^n \Big(H\bigg( \frac{N}{\f{N}(\f{p})^{a_j}}\bigg) - H\bigg(\frac{N}{\f{N}(\f{p})^{a_j + 1}}\bigg)\Big)\Big].$$
+\end{lemma}
+
+\begin{proof}
+	Since the number of nonzero ideals with norm at most $N$ that are divisible by $\f{p}^j$ (for some nonzero prime ideal $\f{p}$ and positive integer $j$) equals $H\big(\frac{N}{\f{N}(\f{p})^j}\big)$, it follows that the number of nonzero prime ideals at most $N$ where $\f{p}^j$ \textit{exactly} divides the positive integer is equal to
+	$$H\bigg(\frac{N}{\f{N}(\f{p})^j}\bigg) - H\bigg(\frac{N}{\f{N}(\f{p})^{j+1}}\bigg).$$
+	
+	\noindent Next, the number of ordered $n$-tuples $(m_1, ..., m_n)$ of nonzero ideals in which entry is at most $N$ satisfying the conditions $\f{p}^{a_j} \mid\mid m_j$ for each $j = 1, ..., n$ is given by the quantity
+	$$\prod_{j=1}^n H\bigg(\frac{N}{\f{N}(\f{p})^j}\bigg) - H\bigg(\frac{N}{\f{N}(\f{p})^{j+1}}\bigg).$$
+	
+	\noindent Therefore, we conclude that $Q_{\f{p}^k}(N)$ is given as follows:
+	$$Q_{\f{p}^k}(N) = \sum_{a_1+...+a_n < k} \bigg[\prod_{j=1}^n H\bigg(\frac{N}{\f{N}(\f{p})^j}\bigg) - H\bigg(\frac{N}{\f{N}(\f{p})^{j+1}}\bigg)\bigg].$$ 
+\end{proof}
+
+We now give a less cumbersome representation for $Q_{p^k}(N)$ by estimating the error from removing the ideal counting functions from its expression.
+
+\begin{lemma}
+	Using the same notation as in the previous lemma, we have the following estimate:
+	$$Q_{\f{p}^k}(N) = H(N)^n\Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p})} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big) + O(1).$$
+\end{lemma}
+
+\begin{proof}
+	Applying Marcus' estimate to the result from the previous lemma, for some $c,\epsilon>0$, we obtain
+	\begin{align*} 
+		Q_{p^k}(N) &= \sum_{a_1+...+a_n < k} H(N)^n\Big[\prod_{j=1}^n \frac{1}{\f{N}(\f{p})^j}-\frac{1}{\f{N}(\f{p})^{j+1}}+O\bigg(\frac{1}{N^\epsilon}\bigg)\Big]\\ 
+		&= H(N)^n\Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \sum_{a_1+...+a_n < k} \frac{1}{\f{N}(\f{p})^{a_1 + ... + a_n}} + O(1). 
+	\end{align*} 
+	\noindent Next for each non-negative integer less than $k$, there are \small${}_nH_j = \binom{n-1+j}{j}\ $ \normalsize  solutions in non-negative integers to the equation $a_1+...+a_n = j$. Hence we conclude that
+	$$Q_{\f{p}^k}(N) = H(N)^n\Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p})} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big) + O(1),$$
+	as required.
+\end{proof}
+
+Now, we are ready to state and prove the main theorem of this section.
+
+\begin{theorem}
+	Fix positive integers $B$ and $N$, and let $\f{p}_1, \f{p}_2, ...$ be the non zero prime ideals with norm greater than $B$ in increasing order. Then, the probability of the $k$-GCD of products of random non zero ideals is not divisible by the first $l$ prime ideals with norm greater than $B$ is given by 
+	$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{\f{p}_i}\Big)^n\Big)^m\Big].$$
+\end{theorem}
+
+\begin{proof}
+	Letting $Q_{\f{p}^k}(N)$ denote the number of $n$ non zero ideals each of which have norm at most $N$ that are not divisible by $\f{p}^k$ (as in the previous two lemmas), there are $H(N)^n - Q_{\f{p}^k}(N)$ products of $n$ non zero ideals each of which has norm at most $N$ that are divisible by $\f{p}^k$. Therefore, there are 
+	$$H(N)^{mn} - (H(N)^n - Q_{\f{p}^k}(N))^m$$
+	ordered $m$-tuples of products of $n$ non zero ideals each of which is at most $N$ that are not divisible by $\f{p}^k$.
+	Hence, the probability that an ordered $m$-tuples of products of $n$ non zero ideals each of which has norm at most $N$ that are not divisible by $\f{p}^k$ is equal to
+	$$\frac{H(N)^{mn} - (H(N)^n - Q_{\f{p}^k}(N))^m}{H(N)^{mn}} = 1 - \Big(1 - \frac{Q_{\f{p}^k}(N)}{H(N)^n}\Big)^m.$$
+	Now, we use the result of the previous lemma to rewrite the latter probability as follows:
+	$$1 - \Big[1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p})} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big]^m+O\bigg(\frac{1}{H(N)^{nm}}\bigg).$$
+	Then, since divisibility by finitely many nonzero prime ideals give independent events, we deduce that the probability that an ordered $m$-tuples of products of $n$ non zero ideals each of which is at most $N$ that are not divisible by $\f{p}_1^k,\mathellipsis,\f{p}_l^k$ is equal to
+	\begin{align*} &\prod_{i=1}^l \Bigg[1 - \Big[1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p}_i)} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big]^m + O\bigg(\frac{1}{H(N)^{nm}}\bigg) \Bigg]\\
+		&=\prod_{i=1}^l \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p}_i)}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big)^m\Big] + O\Big(\frac{1}{H(N)^{mn}}\Big). \end{align*}
+	
+	\noindent Letting $N \to \infty$ now gives us the desired result.
+\end{proof}
+
+So far, we have found the probability that the $k$-GCD of products of random nonzero ideals is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
 
 
 \printbibliography
