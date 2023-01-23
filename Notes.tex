@@ -374,7 +374,7 @@ Since we ultimately want to let $N \to \infty$, we now use the above Lemma to es
 \begin{align*}& \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \Big(\frac{1}{p_i} + O\Big(\frac{1}{N}\Big)\Big) \Big)^n\Big)^m\Big]\\
 &= \prod_{i=1}^l \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big] + O\Big(\frac{1}{N^{nm}}\Big).\end{align*}
 
-\noindent Finally letting $N \to \infty$ now gives us the desired result. $\blacksquare$
+\noindent Finally letting $N \to \infty$ now gives us the desired result.
 \end{proof}
 
 So far, we have found the probability that the GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this GCD is $B$-friable.
@@ -562,7 +562,7 @@ Now, we are ready to state and prove the main theorem of this section.
 
 \begin{theorem}
 Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. Then, the probability of the $k$-GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by 
-$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n\Big)^m\Big].$$
+$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
 \begin{proof}
@@ -585,8 +585,34 @@ So far, we have found the probability that the $k$-GCD of products of random int
 \begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd_k(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
 $$\prod_{p>B} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n\Big)^m\Big].$$
 \end{theorem}
+
+\todo[inline]{REVIEW ME! Prove via the Dominated Convergence Theorem stuff here!}
 \begin{proof}
-\todo[inline]{Prove via the Dominated Convergence Theorem stuff here!}
+	Letting $P(l, N)$ denote the probability in the previous theorem (and for convenience setting $P(0, N) = 1$, we define $g_N(l) = P(l-1, n) - P(l, n)$. Then, we see that $g_N(l)$ is precisely the probability that $k\text{-}\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is coprime to $p^k_1, \mathellipsis, p^k_{l-1}$ and divisible by $p^k_l$ for uniformly and independently chosen $r_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
+	$$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s).$$
+	In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{p_{l}^{m}}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
+	
+	We start by showing that $g_N(l)$ is bounded. First of all, observe that
+	$$g_N(l) \leq \text{Pr}\Big(p_l^k \Big| \gcd\Big(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj}\Big)\Big).$$
+	Computing the numerator to the probability on the last line, we find that
+	\begin{align*} 
+		\Big|\{(r_{ij}) : p_l^k \mid \prod_{j=1}^n r_{1j}\}\Big|^m &= \frac{(N^n - |\{(r_{1j}) : p_l^k \nmid \prod_{j=1}^n r_{1j}\}|)^m}{N^{mn}}\\
+		&= \frac{(N^n - |\{r_{11} : p_l^k \nmid r_{11}\}|^n)^m}{N^{mn}}. \end{align*}
+	Therefore, it follows that
+	\begin{align*} 
+		g_N(l) &\leq \frac{(N^n - |\{r_{11} : p_l^k \nmid r_{11}\}|^n)^m}{N^{mn}}\\
+		&= \Big[1 - \Big(1 - \frac{1}{N} \Big\lfloor \frac{N}{p_l^k}\Big\rfloor\Big)^n\Big]^m\\
+		&\leq \Big[1 - \Big(1 - \frac{1}{p_l^k}\Big)^n\Big]^m\\
+		&\leq \frac{n^m}{p_l^{m}},\end{align*}
+	where the last inequality directly follows from Bernoulli's inequality. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a convergent $p$-series (noting that $m \geq 2$):
+	$$\sum_{l=1}^{\infty} g(l) = n^m \sum_{l=1}^{\infty} \frac{1}{p_l^m} < n^m \sum_{j=1}^{\infty} \frac{1}{j^m}.$$
+	
+	Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{s=1}^l g_N(s)$ is a telescoping sum, we obtain
+	$$\sum_{s=1}^l g_N(s) = \sum_{s=1}^l (P(s-1, n) - P(s, n)) = 1 - P(l, N),$$ 
+	and thus
+	$$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p^k_i}  \Big)^n\Big)^m\Big].$$
+	
+	\noindent Then since $\displaystyle \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%
@@ -1063,13 +1089,13 @@ $$\lim_{N\to\infty} \frac{T(l,N)}{H(N)^{mn}} = \prod_{i=1}^{l}\Big[1-\Big\{1-\Bi
 
 \section{k-gcd number ring prototype}
 
-\begin{definition} Fix a positive integer $k$. The \textbf{$k$-gcd} of $n$ prime ideals $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$, written $\gcd_k(\f{a}_1,\f{a}_2, \mathellipsis,\f{a}_n)$, is the largest prime ideal whose $k^{\text{th}}$ power divides each of $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$.
+\begin{definition} Fix a positive integer $k$. The \textbf{$k$-gcd} of $n$ prime ideals $\f{a}_1$, $\f{a}_2$,$\mathellipsis$, $\f{a}_n$ in a number ring $\mathcal{O}$, written $\gcd_k(\f{a}_1,\f{a}_2, \mathellipsis,\f{a}_n)$, is the largest prime ideal whose $k^{\text{th}}$ power divides each of $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$.
 \end{definition}	
 
-\noindent Observe that when $k=1$, the $k$-gcd reduces to the classic gcd.
+\noindent Observe that when $k=1$, the $k$-gcd reduces to the standard gcd of ideals.
 
 \begin{lemma}
-	Fix positive integers $k$ and $N$. Let $Q_{\f{p}^k}(N)$ the number of ordered $n$-tuples of non zero ideals in which each entry has norm at most $N$ such that $\f{p}^k$ does not divide the product of these entries. Then, we have
+	Fix positive integers $k$ and $N$. Let $Q_{\f{p}^k}(N)$ the number of ordered $n$-tuples of nonzero ideals in a number ring $\mathcal{O}$, in which each entry has norm at most $N$ such that $\f{p}^k$ does not divide the product of these entries. Then, we have
 	$$Q_{\f{p}^k}(N) = \sum_{a_1+...+a_n < k} \Big[\prod_{j=1}^n \Big(H\bigg( \frac{N}{\f{N}(\f{p})^{a_j}}\bigg) - H\bigg(\frac{N}{\f{N}(\f{p})^{a_j + 1}}\bigg)\Big)\Big].$$
 \end{lemma}
 
@@ -1105,26 +1131,28 @@ We now give a less cumbersome representation for $Q_{p^k}(N)$ by estimating the 
 Now, we are ready to state and prove the main theorem of this section.
 
 \begin{theorem}
-	Fix positive integers $B$ and $N$, and let $\f{p}_1, \f{p}_2, ...$ be the non zero prime ideals with norm greater than $B$ in increasing order. Then, the probability of the $k$-GCD of products of random non zero ideals is not divisible by the first $l$ prime ideals with norm greater than $B$ is given by 
-	$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{\f{p}_i}\Big)^n\Big)^m\Big].$$
+	Fix positive integers $B$ and $N$, and let $\f{p}_1, \f{p}_2, ...$ be the prime ideals in a number ring $\mathcal{O}$ with norm greater than $B$ in increasing order. Then, the probability of the $k$-GCD of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first $l$ prime ideals with norm greater than $B$ is given by 
+	$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{\mathfrak{N}(\f{p}_i)}\Big)^n \Big(1+\frac{{}_nH_1}{\f{N}(\f{p}_i)}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
 \begin{proof}
-	Letting $Q_{\f{p}^k}(N)$ denote the number of $n$ non zero ideals each of which have norm at most $N$ that are not divisible by $\f{p}^k$ (as in the previous two lemmas), there are $H(N)^n - Q_{\f{p}^k}(N)$ products of $n$ non zero ideals each of which has norm at most $N$ that are divisible by $\f{p}^k$. Therefore, there are 
-	$$H(N)^{mn} - (H(N)^n - Q_{\f{p}^k}(N))^m$$
-	ordered $m$-tuples of products of $n$ non zero ideals each of which is at most $N$ that are not divisible by $\f{p}^k$.
-	Hence, the probability that an ordered $m$-tuples of products of $n$ non zero ideals each of which has norm at most $N$ that are not divisible by $\f{p}^k$ is equal to
-	$$\frac{H(N)^{mn} - (H(N)^n - Q_{\f{p}^k}(N))^m}{H(N)^{mn}} = 1 - \Big(1 - \frac{Q_{\f{p}^k}(N)}{H(N)^n}\Big)^m.$$
-	Now, we use the result of the previous lemma to rewrite the latter probability as follows:
-	$$1 - \Big[1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p})} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big]^m+O\bigg(\frac{1}{H(N)^{nm}}\bigg).$$
-	Then, since divisibility by finitely many nonzero prime ideals give independent events, we deduce that the probability that an ordered $m$-tuples of products of $n$ non zero ideals each of which is at most $N$ that are not divisible by $\f{p}_1^k,\mathellipsis,\f{p}_l^k$ is equal to
-	\begin{align*} &\prod_{i=1}^l \Bigg[1 - \Big[1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p}_i)} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big]^m + O\bigg(\frac{1}{H(N)^{nm}}\bigg) \Bigg]\\
-		&=\prod_{i=1}^l \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p}_i)}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big)^m\Big] + O\Big(\frac{1}{H(N)^{mn}}\Big). \end{align*}
+Letting $Q_{\f{p}^k}(N)$ denote the number of $n$ non zero ideals each of which have norm at most $N$ that are not divisible by $\f{p}^k$ (as in the previous two lemmas), there are $H(N)^n - Q_{\f{p}^k}(N)$ products of $n$ nonzero ideals each of which has norm at most $N$ that are divisible by $\f{p}^k$. Therefore, there are 
+$$H(N)^{mn} - (H(N)^n - Q_{\f{p}^k}(N))^m$$
+ordered $m$-tuples of products of $n$ nonzero ideals each of which is at most $N$ that are not divisible by $\f{p}^k$.
+
+Hence, the probability that an ordered $m$-tuples of products of $n$ nonzero ideals each of which has norm at most $N$ that are not divisible by $\f{p}^k$ is equal to
+$$\frac{H(N)^{mn} - (H(N)^n - Q_{\f{p}^k}(N))^m}{H(N)^{mn}} = 1 - \Big(1 - \frac{Q_{\f{p}^k}(N)}{H(N)^n}\Big)^m.$$
+
+Now, we use the result of the previous lemma to rewrite the latter probability as follows:
+$$1 - \Big[1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p})} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big]^m+O\bigg(\frac{1}{H(N)^{nm}}\bigg).$$
+Then, since divisibility by finitely many nonzero prime ideals give independent events, we deduce that the probability that an ordered $m$-tuples of products of $n$ nonzero ideals each of which is at most $N$ that are not divisible by $\f{p}_1^k,\mathellipsis,\f{p}_l^k$ is equal to
+\begin{align*} &\prod_{i=1}^l \Bigg[1 - \Big[1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p}_i)} + ... + \frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big]^m + O\bigg(\frac{1}{H(N)^{nm}}\bigg) \Bigg]\\
+&=\prod_{i=1}^l \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p}_i)}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)\Big)^m\Big] + O\Big(\frac{1}{H(N)^{mn}}\Big). \end{align*}
 	
-	\noindent Letting $N \to \infty$ now gives us the desired result.
+\noindent Letting $N \to \infty$ now gives us the desired result.
 \end{proof}
 
-So far, we have found the probability that the $k$-GCD of products of random nonzero ideals is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
+So far, we have found the probability that the $k$-GCD of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
 
 
 \printbibliography
