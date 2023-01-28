@@ -1,0 +1,225 @@
+\documentclass[12pt]{amsart}
+
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{tabularx}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\def\thesistitle{TODO: Unknown}
+\def\name{Adrian Vazquez}
+\newif \ifshort
+
+%% Comittee
+%%%%%%%%%%%%%%%% Make appropriate substitutions here %%%%%%%%%%%%
+\newcommand{\thesisadvisor}{Dr. Brian Sittinger}
+\newcommand{\firstfaculty}{Dr. Ivona Grzegorczyk}
+%\newcommand{\secondfaculty}{Dr. Jorge Garc\'{i}a}
+\newcommand{\univefaculty}{Dr. Jill Leafstedt}
+%%%%%%%%%%%%%%%% ~Make appropriate substitutions here %%%%%%%%%%%%
+
+\newcommand{\committee}{\vspace*{1.25in} 
+\begin{tabular}{ll}
+   \multicolumn{2}{c}{\hspace*{2.9cm} APPROVED FOR THE MATHEMATICS PROGRAM}\\[10mm]
+   %% Advisor
+   \multicolumn{2}{c}{\hspace*{1.65cm}\rule{4.5in}{.01in}}\\[-4mm]
+   \hspace*{3cm}\thesisadvisor, Thesis Advisor \hspace*{0cm}&  Date\\[4mm]
+   %% Committee 1
+   \multicolumn{2}{c}{\hspace*{1.65cm}\rule{4.5in}{.01in}}\\[-4mm]
+   \hspace*{3cm}\firstfaculty, Thesis Committee \hspace*{0cm}&  Date\\[4mm]
+   \multicolumn{2}{c}{\hspace*{1.65cm}\rule{4.5in}{.01in}}\\[-4mm]
+   %% Committee 2
+   %\hspace*{3cm}\secondfaculty, Thesis Committee  &  Date\\[20mm]
+   %\multicolumn{2}{c}{\hspace*{6.15cm} APPROVED FOR THE UNIVERSITY}\\[6mm]
+   %\multicolumn{2}{c}{\hspace*{1.9cm}\rule{4.5in}{.01in}}\\[-4mm]
+    \hspace*{3cm}\univefaculty, AVP Extended University \hspace*{0cm}&  Date\\
+ \end{tabular}}
+%% ~Comittee
+
+%% Included Preamble
+\usepackage{amssymb,latexsym,amsmath,amsthm,amsfonts,graphics}
+\newcommand\Month{%
+\ifcase\number\month\relax%
+\or January\or February\or March\or April\or May\or June%
+\or July\or August\or September\or October\or November\or December\fi}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\aaa}{\mathfrak{a}}
+\newcommand{\ppp}{\mathfrak{p}}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{conj}{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+%% thesis margins
+\setlength{\headheight}{0in}
+\setlength{\voffset}{.25in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\textheight}{8.5in}
+\setlength{\textwidth}{6.5in}
+\setlength{\footskip}{0.55in}
+\linespread{2.0}
+%% !Included Preamble
+
+%% Author Preamble
+\usepackage{todonotes}
+\newcommand{\f}[1]{\mathfrak{#1}} 
+%% ~Author Preamble
+
+\begin{document}
+\newpage
+This page is here to make the page numbers come out correctly.
+
+Do not print this page.
+\newpage
+
+\pagestyle{empty} \pagenumbering{roman}
+
+\vspace*{.45in}
+
+\begin{center}
+\LARGE\it \thesistitle
+\end{center}
+
+\vskip 0.8in
+
+\begin{center}
+A Thesis Presented to \\
+The Faculty of the Mathematics Program \\
+California State University Channel Islands
+\end{center}
+
+\vskip .75in
+
+\begin{center}
+In (Partial) Fulfillment \\
+of the Requirements for the Degree \\
+Masters of Science
+\end{center}
+
+\vskip .75in
+
+\begin{center}
+by
+\end{center}
+\begin{center}
+\name
+\end{center}
+
+\begin{center}
+ \Month, \number\year
+\end{center}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% copyright notice
+%% this is optional
+
+% \newpage
+
+% \setlength{\topmargin}{2cm}
+% %\setlength{\textheight}{25.5cm}
+
+% \vspace*{6in}
+
+% \begin{center}
+
+% \copyright{} \number\year\\
+% \name\\
+% ALL RIGHTS RESERVED
+
+
+% \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% approval page
+
+\newpage
+ \setlength{\paperheight}{13in}
+ \setlength{\topmargin}{1.25cm}
+
+{\center\emph{Signature page for the Masters in Mathematics Thesis of \name}}
+
+\committee
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A dedication is optional. Edit this section to make it your own or delete it.
+ \newpage
+ \setlength{\topmargin}{-0.4375in}
+ \setlength{\paperheight}{11.5in}
+
+\newpage
+
+\begin{center}
+\vspace*{50mm}
+{\bf Acknowledgements}
+\end{center}
+
+\todo[inline,color=red]{Acknowledgements}
+\newpage
+
+%% Abstract
+\pagestyle{plain}
+
+{\bf Abstract}
+\bigskip
+\begin{quote}
+\todo[inline,color=red]{Abstract}
+\end{quote}
+%% ~Abstract
+
+%% TOC
+\newpage
+\tableofcontents
+\newpage
+%% List of Figures
+\newpage
+\pagenumbering{arabic}
+%% ~TOC
+
+%% Thesis Content
+\section{Overview}
+
+\subsection{Introduction}
+\todo[inline, color=red]{Content}
+
+\subsection{Elementary Background}
+\todo[inline, color=red]{Content}
+
+
+%\subsection{Organization of the Thesis}
+\todo[inline, color=red]{Thesis Organization Remarks?}
+
+\newpage
+%% Main Content
+\todo[inline, color=red]{Main Content}
+%% ~Main Content
+\newpage 
+
+\section{Future Research}
+\todo[inline, color=red]{Future Research}
+
+
+
+\newpage
+\todo[inline, color=red]{AMS Style Citations?}
+\todo[inline, color=red]{Link bibtex}
+\begin{thebibliography}
+
+\end{thebibliography}
+
+
+\newpage
+
+\section{Appendix I}
+\end{document}
