@@ -173,14 +173,10 @@ by
 
 \pagestyle{plain}
 
-{\bf Abstract}
-\bigskip
-\begin{quote}
-In 2016, Cheon and Kim derived the probability that the $k$-GCD of products of positive integers is $B$-Friable by using the Inclusion-Exclusion principle. We start by providing a more concise proof to Cheon and Kim's result. Then, we generalize their results to any ring of algebraic integers.
-\end{quote}
-
-%No quoting needed in abstract
-
+%{\bf Abstract}
+%\bigskip
+\section*{Abstract}
+In 2016, Cheon and Kim proved the probability that the $k$-GCD of products of positive integers is $B$-Friable using the Inclusion-Exclusion principle. We provide a more concise proof to Cheon and Kim's result and generalize their results to any ring of algebraic integers.
 
 \newpage
 \tableofcontents
@@ -194,15 +190,15 @@ In 2016, Cheon and Kim derived the probability that the $k$-GCD of products of p
 
 \subsection{Introduction}
 
-In 1737, Euler derived a closed form of the sum of the reciprocals square of rational integers $\zeta(2)$, which was later generalized as a complex function in 1859 by Riemann. In 1849, Dirichlet \cite{Dirichlet} proved that the probability of two random integers are relatively prime is $\frac{1}{\zeta(2)}$. In 1900, Lehmer \cite{Lehmer} extended Dirichlet's result by proving that the probability that $k$ integers are relatively prime is $\frac{1}{\zeta(k)}$. This was subsequently proved again by Nymann in 1970 by using Inclusion-Exclusion \cite{Nymann}. In 1976, Benkoski \cite{Benkoski} provided a proof showing that the probability that $k$ integers are relatively $r$-prime is $\frac{1}{\zeta(rk)}$. In 2010, Sittinger \cite{Sittinger} provided a more concise proof of Benkoski's theorem using methods developed by Nymann, and then extended the result to the algebraic integers. More recently, Cheon and Kim derived the probability that the gcd and $k$-gcd of products of positive integers is $B$-Friable \cite{Cheon}.
+In 1737, Euler derived a closed form of the sum of the reciprocals square of rational integers $\zeta(2)$, which was later generalized as a complex function in 1859 by Riemann. In 1849, Dirichlet \cite{Dirichlet} proved that the probability of two random integers are relatively prime is $\frac{1}{\zeta(2)}$. In 1900, Lehmer \cite{Lehmer} extended Dirichlet's result by proving that the probability that $k$ integers are relatively prime is $\frac{1}{\zeta(k)}$. This was subsequently proved again by Nymann in 1970 by using Inclusion-Exclusion \cite{Nymann}. In 1976, Benkoski \cite{Benkoski} provided a proof showing that the probability that $k$ integers are relatively $r$-prime is $\frac{1}{\zeta(rk)}$. In 2010, Sittinger \cite{Sittinger} provided a more concise proof of Benkoski's theorem using methods developed by Nymann and extended the result to the algebraic integers. More recently, Cheon and Kim provided a proof for the probability that the gcd and $k$-gcd of products of positive integers is $B$-Friable \cite{Cheon}.
 
-In this paper we review Cheon and Kim's proofs and provide more concise proofs by applying counting arguments. We then generalize their results to the algebraic integers. 
+In this paper we provide more concise versions of Cheon and Kim's results by applying counting arguments. We then use our method to generalize their results to the algebraic integers. 
 
 \subsection{B-smooth numbers in Cryptography}
-Given sufficiently large numbers, there is currently no known efficient non-quantum prime factorization algorithm.
-The difficulty of the prime factorization problem is leveraged by cryptographers to build cryptographic schemes that are difficult to crack using even the current most efficient algorithm, the General Number Field Sieve, on hundreds of specialized computers (one can imagine the near impossibility of randomly guessing the factorization). 
+Given sufficiently large integers, there is currently no known efficient non-quantum prime factorization algorithm.
+The difficulty of the prime factorization problem is leveraged by cryptographers to build cryptographic schemes that are difficult to crack using even the current most efficient algorithm, the General Number Field Sieve, running on hundreds of specialized computers (one can imagine the near impossibility of randomly guessing the factorization). 
 
-With the rise of cybercrime, espionage, and the world's reliance on computers, it has become more important than ever to ensure that effective cryptography schemes exist in order to protect data privacy and integrity. To this end, factorization algorithms are constantly evolving in order to attack and prove the effectiveness of algorithms that rely on the difficulty of the prime factorization problem (some of these algorithms can be applied on discrete logarithm problem based cryptography).
+With the rise of cybercrime, espionage, and the world's reliance on computers and digital information, it has become more critical to ensure that secure cryptography schemes exist in order to protect data privacy and integrity. To this end, factorization algorithms are constantly evolving in order to attack and prove the effectiveness of cryptography schemes that employ the difficulty of the prime factorization problem (some of these prime factorization algorithms can be applied on discrete logarithm problem based cryptography).
 
 \noindent\textbf{Example:} RSA-130 is the following integer with 130 digits:
 $$18070820886874048059516561644059055662781025167694013491701270214500566625402440\\$$
@@ -249,7 +245,7 @@ We have now seen that finding efficient ways of identifying $B$-smooth numbers i
 
 \subsection{Elementary Definitions}
 
-We give a quick overview of key theorems and definitions from number theory useful for the following proofs. In particular, we will apply these concepts while treating the cases for the rational integers. For organization purposes, we will provide algebraic integer analogs of these concepts later in the paper when we turn our efforts towards generalizing the rational integer results to the algebraic integers.
+We give a quick overview of key theorems and definitions from number theory useful for the following proofs. In particular, we apply these concepts while treating the cases for the rational integers. For organization purposes, we provide algebraic integer analogs of these concepts later in the paper when our efforts turn towards generalizing the rational integer results to the algebraic integers.
 
 \begin{definition} \label{riemann-zeta}
 	The \textbf{Riemann Zeta function} is defined by 
@@ -261,14 +257,14 @@ Fix $k,r\in \mathbb{N}$ not both equal to 1. Then the probability that $k$ rando
 \end{theorem}
 
 
-\begin{definition} The \textbf{floor function} $f: \mathbb{R} \to \mathbb{Z}$ is given by $f(x) = \lfloor x \rfloor$, where $\lfloor x \rfloor = n$ for some fixed integer $n$ if and only if $n\leq x < n+1$.
+\begin{definition} The \textbf{floor function} $f: \mathbb{R} \to \mathbb{Z}$ is defined by $f(x) = \lfloor x \rfloor$, where $\lfloor x \rfloor = n$ for some fixed integer $n$ if and only if $n\leq x < n+1$.
 \end{definition}
 
 \begin{definition} For a fixed integer \(r\geq 1\), we say that the integers \(m_1,m_2,\mathellipsis,m_k\) are \textbf{relatively \(r\)-prime} if and only if they have no common factor of the form \(n^r\) for \(n>1\). 
 \end{definition}
 
  \section{Probability that the GCD of products of positive integers is  B-Friable}
-We now provide a concise proofs for the probability that the gcd and k-gcd are B-Friable before showing the same proofs derived using the inclusion-exclusion principle as show by Cheon and Kim.
+We now provide concise proofs for the probability that the gcd and k-gcd are B-Friable by using counting arguments. Appendix A contains detailed versions of Cheon and Kim's original proofs using the inclusion-exclusion principle. %Hyperref? 
 
 \begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{$B$-friable ($B$-smooth)} if $x$ has no prime divisor greater than $B$. 
 \end{definition}
@@ -277,11 +273,11 @@ We now provide a concise proofs for the probability that the gcd and k-gcd are B
 
 \vspace{.1 in}
 
-For the remainder of this section, we are going to find the probability that the greatest common divisor (GCD) of $m$ products of $n$ positive integers (all randomly chosen in a uniform and independent manner) is $B$-friable.
+For the remainder of this section, we find the probability that the greatest common divisor (GCD) of $m$ products of $n$ positive integers (all randomly chosen in a uniform and independent manner) is $B$-friable.
 
 \vspace{.1 in}
 
-To this end, we fix a positive integer $N$. Then, we randomly choose uniformly and independently distributed  integers $r_{ij} \in [1, N]$ for each integer $1 \leq i \leq m$ and $1 \leq j \leq n$ where $m \geq 2$ and $n \geq 1$. Our goal is to compute the probability that an ordered $m$-tuple $(r_{ij})$satisfies the following condition:
+To this end, we fix a positive integer $N$. Then, we randomly choose uniformly and independently distributed  integers $r_{ij} \in [1, N]$ for each integer $1 \leq i \leq m$ and $1 \leq j \leq n$ where $m \geq 2$ and $n \geq 1$. Our goal is to compute the probability that an ordered $m$-tuple $(r_{ij})$ satisfies the following condition:
 $$\gcd\Big(\prod_{j=1}^nr_{1j}, ..., \prod_{j=1}^n r_{mj}\Big)$$
 is relatively prime to the first $l$ primes greater than $B$. 
 
@@ -302,7 +298,7 @@ Before stating the main theorem for this section, we establish the following use
 Now, we are ready to state and prove the main theorem of this section.
 
 \begin{theorem}
-	Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. Then, the probability of the GCD of products of random positive integers is not divisible by the first $l$ primes greater than $B$ is given by \label{probability-random-first-l}
+	Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. The probability of the GCD of products of random positive integers is not divisible by the first $l$ primes greater than $B$ is given by \label{probability-random-first-l}
 	$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n\Big)^m\Big].$$
 \end{theorem}
 
@@ -360,7 +356,6 @@ We have found the probability that the GCD of products of random integers is not
 	\noindent Then since $\displaystyle \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
 \end{proof}
 
-\todo[inline, color=red]{Move to subsection and after altnerative proof, since this depends on either.}
 Having derived the probability that the GCD of products of randomly chosen positive integers is $B$-friable, we now find more convenient bounds for this product representation.
 
 \begin{theorem} The probability that $\gcd(\prod_{j=1}^n r_{1j}, ..., \prod_{j=1}^{n}r_{mj})$ is $B$-friable is bounded above by 
@@ -398,7 +393,7 @@ Having derived the probability that the GCD of products of randomly chosen posit
 \end{theorem}
 
 \begin{proof}
-	By the work done in the section so far, we see that $\displaystyle \frac{T(l,N)}{N^{nm}}$ is equal to 
+	By the work done in the section, we see that $\displaystyle \frac{T(l,N)}{N^{nm}}$ is equal to 
 	\begin{align*}
 		&\frac{1}{N^{nm}}\sum_{P\subset X_l}{(-1)^{|P|}}\Big[\sum_{Q\subset P}(-1)^{|Q|}\Big(\sum_{R\subset Q}(-1)^{|R|}\Big\lfloor\frac{N}{\prod_{p\in R} p} \Big\rfloor\Big)^n\Big]^m\\
 		&= \sum_{P\subset X_l}{(-1)^{|P|}} \Big[\sum_{Q\subset P}(-1)^{|Q|} \Big(\sum_{R\subset Q}(-1)^{|R|} \frac{1}{\prod_{p\in R} p}\Big)^n\Big]^m+O\Big(\frac{1}{N^{nm}}\Big).
@@ -414,7 +409,7 @@ Having derived the probability that the GCD of products of randomly chosen posit
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Probability that the k-GCD of products of positive integers is  B-Friable}
-In this section we will extend the previous results to the k-gcd, and in a similar fashion, begin with a more concise proof before showing the original proof derived via the inclusion-exclusion principle in detail.
+In this section we extend the previous results to the $k$-gcd, and in a similar fashion, begin with a more concise proof.
 
 \begin{definition} Fix a positive integer $k$. The \textbf{$k$-gcd} of $n$ nonzero integers $x_1, ..., x_n$, written $\gcd_k(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{\text{th}}$ power divides each of $x_1, x_2, ..., x_n$.
 \end{definition}	
@@ -431,7 +426,7 @@ As $k$ varies, it is possible that the $k$-gcd of a set of nonzero integers can 
 
 \noindent However since $\gcd_8(2^7, 2^6 \cdot 3, 2^8 \cdot 5) = 1$, we find that $2^7, 2^6 \cdot 3, 2^8 \cdot 5$ are relatively $8$-prime.
 
-As in the previous sections, we fix a positive integer $N$. Then, we randomly choose uniformly and independently integers $r_{ij} \in [1, N]$ for each integer $1 \leq i \leq m$ and $1 \leq j \leq n$ where $m \geq 2$ and $n \geq 1$. We want to find the probability that an ordered $m$-tuple $(r_{ij})$ such that 
+As in the previous proofs, we fix a positive integer $N$. Then, we randomly, uniformly, and independently choose integers $r_{ij} \in [1, N]$ for each integer $1 \leq i \leq m$ and $1 \leq j \leq n$ where $m \geq 2$ and $n \geq 1$. We want to find the probability that an ordered $m$-tuple $(r_{ij})$ such that 
 $$\gcd{}_k\Big(\prod_{j=1}^nr_{1j}, ..., \prod_{j=1}^n r_{mj}\Big)$$
 is coprime to the first $l$ primes greater than $B$. 
 
@@ -475,7 +470,7 @@ We now give a less cumbersome representation for $Q_{p^k}(N)$ by estimating the 
 Now, we are ready to state and prove the main theorem of this section.
 
 \begin{theorem}
-	Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. Then, the probability of the $k$-GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by 
+	Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. The probability of the $k$-GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by 
 	$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
@@ -494,16 +489,16 @@ Now, we are ready to state and prove the main theorem of this section.
 	\noindent Letting $N \to \infty$ now gives us the desired result.
 \end{proof}
 
-So far, we have found the probability that the $k$-GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
+We have found the probability that the $k$-GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
 
 \begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd_k(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
 	$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n\Big)^m\Big].$$
 \end{theorem}
 
 \begin{proof}
-	Letting $P(l, N)$ denote the probability in the previous theorem (and for convenience setting $P(0, N) = 1$, we define $g_N(l) = P(l-1, n) - P(l, n)$. Then, we see that $g_N(l)$ is precisely the probability that $k\text{-}\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is coprime to $p_1, \mathellipsis, p_{l-1}$ and divisible by $p_l$ for uniformly and independently chosen $r_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
+	Letting $P(l, N)$ denote the probability in the previous theorem (and for convenience setting $P(0, N) = 1$, we define $g_N(l) = P(l-1, n) - P(l, n)$. Then, we see that $g_N(l)$ is precisely the probability that $\gcd_k(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is coprime to $p_1, \mathellipsis, p_{l-1}$ and divisible by $p_l$ for uniformly and independently chosen $r_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
 	$$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s).$$
-	In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{p_{l}^{m}}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
+	In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{p_{l}^{km}}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
 	
 	We start by showing that $g_N(l)$ is bounded. First of all, observe that
 	$$g_N(l) \leq \text{Pr}\Big(p_l^k \Big| \gcd\Big(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj}\Big)\Big).$$
@@ -516,9 +511,10 @@ So far, we have found the probability that the $k$-GCD of products of random int
 		g_N(l) &\leq \frac{(N^n - |\{r_{11} : p_l^k \nmid r_{11}\}|^n)^m}{N^{mn}}\\
 		&= \Big[1 - \Big(1 - \frac{1}{N} \Big\lfloor \frac{N}{p_l^k}\Big\rfloor\Big)^n\Big]^m\\
 		&\leq \Big[1 - \Big(1 - \frac{1}{p_l^k}\Big)^n\Big]^m\\
-		&\leq \frac{n^m}{p_l^{m}},\end{align*}
+            &\leq \Big[1 - \Big(1 - \frac{1}{p_l}\Big)^n\Big]^m\\
+		&\leq \frac{n^m}{p_l^{km}},\end{align*}
 	where the last inequality directly follows from Bernoulli's inequality. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a convergent $p$-series (noting that $m \geq 2$):
-	$$\sum_{l=1}^{\infty} g(l) = n^m \sum_{l=1}^{\infty} \frac{1}{p_l^m} < n^m \sum_{j=1}^{\infty} \frac{1}{j^m}.$$
+	$$\sum_{l=1}^{\infty} g(l) = n^m \sum_{l=1}^{\infty} \frac{1}{p_l^{km}} < n^m \sum_{j=1}^{\infty} \frac{1}{j^{km}}.$$
 	
 	Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{s=1}^l g_N(s)$ is a telescoping sum, we obtain
 	$$\sum_{s=1}^l g_N(s) = \sum_{s=1}^l (P(s-1, n) - P(s, n)) = 1 - P(l, N),$$ 
@@ -531,9 +527,7 @@ So far, we have found the probability that the $k$-GCD of products of random int
 
 
 \section{Background Material for the Algebraic Integer case}
-We now provide some key concepts involving algebraic integers that we will use for the remainder of the proofs in this paper. After which, will be well equipped to generalize the previous results from the rational integers to the algebraic integers. Unsurprisingly, the derivations of these results have the similar flow and form to their algebraic integer counterparts, and by choosing particular values, will yield the rational integer cases.
-
-\todo[inline, color=red]{Cite where we can find more background and details as needed here!}
+We now provide some key concepts involving algebraic integers that we will use for the remainder of the proofs in this paper. Unsurprisingly, the derivations of these results have the similar flow and form to their algebraic integer counterparts, and by choosing particular values, will yield the rational integer cases. For further details, please consult a textbook on Algebraic Number Theory, such as \cite{Marcus}.
 
 \begin{definition} A complex number is an \textbf{algebraic number} if it satisfies a polynomial with rational coefficients.
 \end{definition}
@@ -563,7 +557,7 @@ The norm on ideals can be shown to be finite. \cite{Marcus}
 	\end{equation} where the sum is over all non-zero ideals of \(\mathcal{O}\).
 \end{definition}
 
-Equivalently, the Dedekind zeta function can be equivalently defined by the Dirichlet series
+Equivalently, the Dedekind zeta function can be defined by the Dirichlet series
 $$\zeta_\mathcal{O}(s)=\sum_{n=1}^{\infty}\frac{c_n}{n^s},$$
 where \(c_n\) is the number of ideals with norm \(n\).
 
@@ -571,7 +565,7 @@ Moreover, the Dedekind Zeta function can be represented by the Euler Product
 $$\zeta_{\mathcal{O}}(s)=\prod_{\f{p \text{ prime}}}(1-\f{N(p)}^{-s})^{-1}.$$
 
 \begin{remark}
-	As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all \(\text{Re} \, s>1\).
+	As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all \(\text{Re} (s)>1\).
 \end{remark}
 
 \begin{definition} Define the M\"obius Function for Algebraic Number Rings by: 
@@ -591,24 +585,23 @@ $$\zeta_{\mathcal{O}}(s)=\prod_{\f{p \text{ prime}}}(1-\f{N(p)}^{-s})^{-1}.$$
 \end{definition}
 
 \begin{definition} \label{H}
-	Let \(H(n):\mathbb{R} \to \mathbb{Z}\), denote the number of ideals in \(\mathcal{O}\) with norm less than or equal to \(n\).
+	Let $H(n)$ denote the number of ideals in $\mathcal{O}$ with norm less than or equal to $n$.
 \end{definition}
 
-\begin{remark}
-	Note that \(n\) need not be an integer.
-\end{remark}
+Note that $n$ need not be an integer. The following theorem provides an estimate that we repeatedly use in the derivations that follow. A proof of this can be found in \cite{Marcus}.
 
 \begin{theorem} There is a positive constant \(c\) such that \(H(n)=cn+O(n^{1-\epsilon})\) where \(\epsilon = [K : \mathbb{Q}]^{-1}\) \label{H-estimate}. If \(K=\mathbb{Q}\), as in the case for the integers, then \(H\) reduces to the floor function.
 \end{theorem}
-\begin{proof}
-	Refer to \cite{Marcus}.
-\end{proof}
 
 \section{Probability that the GCD of products of algebraic integers is B-Friable}
 
-\begin{definition} Let $B$ be a fixed positive integer and an algebraic number ring $\mathcal{O}$. A nonzero ideal $\mathfrak{a}$ in $\mathcal{O}$ is \textbf{$B$-friable ($B$-smooth)} if $\mathfrak{a}$ has no prime divisor greater than $B$. 
+\begin{definition} Let $B$ be a fixed positive integer and $\mathcal{O}$ be an algebraic number ring. A nonzero ideal $\mathfrak{a}$ in $\mathcal{O}$ is \textbf{$B$-friable ($B$-smooth)} if $\mathfrak{a}$ has no prime ideal factor whose norm is greater than $B$. 
 \end{definition}
-\todo[inline, color=red]{Example}
+
+In the case where $\mathcal{O}$ is a PID, we can replace ideals with elements and check that the elements have no prime factors have absolute value of a norm greater than $B$.
+
+\noindent \textbf{Example:} Let $\mathcal{O} = \mathbb{Z}[i]$, the ring of Gaussian integers, and take $B =  15$. Then $7 + 6i$ is not 15-smooth, because its prime factorization is $(2+i)(4+i)$, and $N(4+i) = 17 > 15$. On the other hand, $9-3i$ is 15-smooth, because its prime factorization is $3(3 - i)$, and the norm of each of its prime factors is less than 15.
+
 For the remainder of this section, we are going to find the probability that the greatest common divisor (GCD) of $m$ products of $n$ nonzero ideals in an algebraic number ring $\mathcal{O}$ (all randomly chosen in a uniform and independent manner) is $B$-friable. 
 
 \vspace{.1 in}
@@ -617,13 +610,12 @@ To this end, we fix a positive integer $N$. Then, we randomly choose uniformly a
 $$\gcd\Big(\prod_{j=1}^n \mathfrak{a}_{1j}, ..., \prod_{j=1}^n \mathfrak{a}_{mj}\Big)$$
 is coprime to the first $l$ prime ideals (arranged in non-decreasing order by norm) having norm greater than $B$. We start with the following error bound.
 
-\begin{lemma} If $k$ is a positive integer, then we have for all sufficiently large $n$
+\begin{lemma}\label{H-estimate-frac} If $k$ is a positive integer, then there exists a constant $\epsilon > 0$ such that for all sufficiently large $n$:
 	$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big).$$
-	\todo[color=red, inline]{Where $\epsilon$ is as in the Marcus estimate; cite!}
 \end{lemma}
 
 \begin{proof}
-	Since we know from \cite{Marcus} that $H(x) = cx + O(x^{1-\epsilon})$ for some constants $c, \epsilon > 0$, there exists a constant $A > 0$ such that for all sufficiently large $x$:
+	Since we know from \cref{H-estimate} that $H(x) = cx + O(x^{1-\epsilon})$ for some constants $c, \epsilon > 0$, there exists a constant $A > 0$ such that for all sufficiently large $x$:
 	$$|H(x) - cx| < Ax^{1-\epsilon}.$$
 	By using this inequality, we deduce for all sufficiently large $n$ that
 	$$\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) \leq \frac{\frac{cn}{k} + A(\frac{n}{k})^{1-\epsilon}}{cn - An^{1-\epsilon}} = \frac{\frac{cn}{k} (1 + \frac{Ak^{\epsilon}}{c} n^{-\epsilon})}{cn(1 - \frac{A}{c}n^{-\epsilon})}.$$
@@ -645,7 +637,7 @@ is coprime to the first $l$ prime ideals (arranged in non-decreasing order by no
 	Then since divisibility by finitely many primes yields independent events, we find that the probability that the GCD of $m$ products of random ideals with norm at most $N$ are not divisible by the first $l$ prime ideals:
 	$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1 - \frac{1}{H(N)} H\Big(\frac{N}{\f{N(p)}}\Big)\Big)^n \Big)^m \Big].$$
 	
-	We now examine what happens to our probability as $N \to \infty$. Using the estimate for $H(n)$ from \cite{Marcus} then gives us
+	We now examine what happens to our probability as $N \to \infty$. Using the estimate for $H(n)$ from \cref{H-estimate-frac} then gives us
 	\begin{align*}
 		&\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)} + O\Big(\frac{1}{N^{\epsilon}}\Big) \Big)^n \Big)^m\Big]\\
 		&=\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p}_i)}\Big)^n \Big)^m \Big] + O\Big(\frac{1}{N^{\epsilon}}\Big).
@@ -671,7 +663,7 @@ As in the case for the integers, this only provides the probability for the firs
 	$$g_N(l) \leq \text{Pr}\Big(\mathfrak{p}_l \Big| \gcd\Big(\prod_{j=1}^n \mathfrak{a}_{1j}, ... , \prod_{j=1}^n \mathfrak{a}_{mj}\Big)\Big).$$
 	Computing the numerator to the probability on the last line, we find that
 	\begin{align*} 
-		\Big|\{(r_{ij}) : \mathfrak{p}_l \mid \prod_{j=1}^n \mathfrak{a}_{1j}\}\Big|^m &= \frac{(H(N)^n - |\{(\mathfrak{a}_{1j}) : \mathfrak{p}_l \nmid \prod_{j=1}^n \mathfrak{a}_{1j}\}|)^m}{H(N)^{mn}}\\ &= \frac{(H(N)^n - |\{r_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}\}|^n)^m}{H(N)^{mn}}. \end{align*}
+		\Big|\{(\f{a}_{ij}) : \mathfrak{p}_l \mid \prod_{j=1}^n \mathfrak{a}_{1j}\}\Big|^m &= \frac{(H(N)^n - |\{(\mathfrak{a}_{1j}) : \mathfrak{p}_l \nmid \prod_{j=1}^n \mathfrak{a}_{1j}\}|)^m}{H(N)^{mn}}\\ &= \frac{(H(N)^n - |\{\f{a}_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}\}|^n)^m}{H(N)^{mn}}. \end{align*}
 	Therefore, it follows for all sufficiently large $N$ that
 	\begin{align*} 
 		g_N(l) &\leq \frac{(H(N)^n - |\{\f{a}_{11} : \mathfrak{p}_l \nmid \mathfrak{a}_{11}\}|^n)^m}{H(N)^{mn}}\\ &\leq \Big(1 - \Big(1 - \frac{1}{H(N)} H\Big(\frac{N}{\f{N}(\f{p}_l)}\Big)\Big)^n\Big)^m\\
@@ -756,8 +748,12 @@ Now, we are ready to state and prove the main theorem of this section.
 
 We have so far found the probability that the $k$-GCD of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
 
-\todo[inline, color=yellow]{Review LDCT!}
-Letting $P(l, N)$ denote the probability in the previous theorem (and for convenience setting $P(0, N) = 1$, we define $g_N(l) = P(l-1, n) - P(l, n)$. Then, we see that $g_N(l)$ is precisely the probability that $k\text{-}\gcd(\prod_{j=1}^n \f{a}_{1j}, ... , \prod_{j=1}^n \f{a}_{mj})$ is coprime to $\f{p}_1, \mathellipsis, \f{p}_{l-1}$ and divisible by $\f{p}_l$ for uniformly and independently chosen $\f{a}_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
+\begin{theorem}
+Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-friable converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
+\end{theorem}
+
+\begin{proof}
+Letting $P(l, N)$ denote the probability in the previous theorem (and for convenience setting $P(0, N) = 1$, we define $g_N(l) = P(l-1, n) - P(l, n)$. Then, we see that $g_N(l)$ is precisely the probability that $\gcd_k(\prod_{j=1}^n \f{a}_{1j}, ... , \prod_{j=1}^n \f{a}_{mj})$ is coprime to $\f{p}_1, \mathellipsis, \f{p}_{l-1}$ and divisible by $\f{p}_l$ for uniformly and independently chosen $\f{a}_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
 $$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s).$$
 In order to accomplish this, we invoke the Dominated Convergence Theorem (for series). To this end, we need to show that $g_N(l)$ is bounded above by $g(l) = \frac{n^m}{\f{N}(\f{p}_{l})^{m}}$ and $\sum_{l=1}^{\infty} g(l)$ converges.
 
@@ -772,12 +768,11 @@ Therefore, it follows that
 	g_N(l) &\leq \frac{(H(N)^n - |\{\f{a}_{11} : \f{p}_l^k \nmid \f{a}_{11}\}|^n)^m}{H(N)^{mn}}\\
 	&\leq \Big[1 - \Big(1 - \frac{1}{H(N)}  H\Big(\frac{N}{\f{N}(\f{p}_l)^k}\Big)\Big)^n\Big]^m\\
 	&\leq \Big[1 - \Big(1 - \Big(\frac{1}{\f{N}(\f{p}_l)^k}+\frac{A}{N^{\varepsilon}}\Big)\Big)^n\Big]^m \text{ for some } A>0\\
-	&\leq (1-(1-\frac{2}{\f{N}(\f{p}_l)^k})^n)^m\\
-	&\leq (1-(1-\frac{2}{\f{N}(\f{p}_l)})^n)^m,
+	&\leq (1-(1-\frac{2}{\f{N}(\f{p}_l)^k})^n)^m,
 \end{align*}
-the latter expression is bounded above by $g(l)=\frac{(2n^m)}{\f{N}(\f{p}_l)^m}$ from Bernoulli's inequality in the form $1-(1-x)^t\leq xt$ for $t\geq 1$ and $0\leq x \leq 1$.
+the latter expression is bounded above by $g(l)=\frac{(2n)^m}{\f{N}(\f{p}_l)^{km}}$ from Bernoulli's inequality in the form $1-(1-x)^t\leq xt$ for $t\geq 1$ and $0\leq x \leq 1$.
 
- Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a constant multiple of the Dedekind Zeta function (with $m\geq 2$) $$ \sum_{l=1}^{\infty}g(l)\leq(2n)^m\sum_{l=1}^{\infty}\frac{1}{\f{N}(\f{p}_l)^m}\leq (2n)^m\zeta_O(m)< \infty.$$
+ Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a constant multiple of the Dedekind Zeta function (with $m\geq 2$) $$ \sum_{l=1}^{\infty}g(l)\leq(2n)^m\sum_{l=1}^{\infty}\frac{1}{\f{N}(\f{p}_l)^{km}}\leq (2n)^m\zeta_O(km)< \infty.$$
 
 Having satisfied the hypotheses of the Dominated Convergence Theorem, we first observe that since $\sum_{s=1}^l g_N(s)$ is a telescoping sum, we obtain
 $$\sum_{s=1}^l g_N(s) = \sum_{s=1}^l (P(s-1, n) - P(s, n)) = 1 - P(l, N),$$ 
@@ -785,6 +780,7 @@ and thus
 $$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = 1 - \prod_{\f{N}(\f{p}) > B} \Big(1 - \Big[1 - \Big(1-\frac{1}{\f{N}(\f{p}_i)}\Big)^n \Big(1 + \frac{{}_nH_1}{\f{N}(\f{p})} + \mathellipsis + \frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big]^m\Big).$$
 
 \noindent Then since $\displaystyle \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
+\end{proof}
 
 \section{Appendix}
 \subsection{Probability that the GCD of products of positive integers is  B-Friable using Inclusion-Exclusion}
@@ -824,7 +820,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 \end{proof}
 
 \begin{theorem}
-	Let \(p_1, p_2,\mathellipsis\) be the prime numbers larger than \(B\) in increasing order.
+	Let \(p_1, p_2,\mathellipsis\) be the prime numbers larger than \(B\) in increasing order,
 	\begin{equation*}
 		\lim\limits_{N\to\infty} \frac{T_k(l,n)}{N^{mn}}=\prod_{i=1}^l\Biggl(1-\Biggl[1-\Biggl(1-\frac{1}{p_i}\Biggr)^n\Biggl(1+\frac{nH_1}{p_i}+\mathellipsis+\frac{nH_{k-1}}{p_i^{k-1}}\Biggr)\Biggr]\Biggr)
 	\end{equation*}
@@ -833,24 +829,22 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 \begin{proof}
 	Let \(X_l=\{p_1,\mathellipsis,p_l\}\) and \(1\leq r_{ij}\leq N\). Using the inclusion exclusion theorem, 
 	\begin{equation*}
-		\frac{T_k(l,n)}{N^{nm}}=\sum_{P\subset X_l}(-1)^{|P|}\Biggl(\sum_{Q\subset P}\Pr\Biggl[p^k\nmid \prod_{j=1}^{n}r_{1j} \; \forall p\in Q \Biggr]\Biggr)^m
+		\frac{T_k(l,n)}{N^{nm}}=\sum_{P\subset X_l}(-1)^{|P|}\Biggl(\sum_{Q\subset P}\Pr\Biggl[p^k\nmid \prod_{j=1}^{n}r_{1j} \; \forall p\in Q \Biggr]\Biggr)^m.
 	\end{equation*}
 	
 	Let \(p^a \mid\mid x\) denote \(p^a\mid x\) and \(p^{a+1}\nmid x\) and let \(a_p,j\in Q\) and \(1\leq j \leq n\).
 	
 	\begin{remark}
-		Regarding \(||\), suppose a tuple satisfies \(a_{p,1}+\mathellipsis+a_{p,n}<k\) with \(a_{p,1}+\mathellipsis+a_{p,n}+1=k\), then \(||\) guarantees \(p^k \nmid x\).
+		Suppose a tuple satisfies \(a_{p,1}+\mathellipsis+a_{p,n}<k\) with \(a_{p,1}+\mathellipsis+a_{p,n}+1=k\), then \(||\) guarantees \(p^k \nmid x\).
 	\end{remark} 
 	
-	
-	The number of \(n\)-tuples of positive integers which satisfy \(a_{p,1}+\mathellipsis+a_{p,n}=i\) is given by \(_nH_i = (\binom{n+i-1}{i})\)
+	Next, we count every composition \(a_{p,1}+\mathellipsis+a_{p,n}<k\) for \(p^{a_{p,j}}\) that divides the quantity. 
 	\begin{remark}
-		The previous statement is based on a result from combinatorics.
+	   The number of \(n\)-tuples of positive integers which are a solution to \(a_{p,1}+\mathellipsis+a_{p,n}=i\) is given by \(_nH_i = (\binom{n+i-1}{i})\)
 	\end{remark}
-	
-	Next, we count every composition \(a_{p,1}+\mathellipsis+a_{p,n}<k\) for \(p^{a_{p,j}}\) that divides the quantity.
-	
-	Thus \begin{align*}
+
+	Thus,
+        \begin{align*}
 		&\Pr\Biggl[p^k\nmid \prod_{j=1}^{n}r_{1j},\:\forall p\in Q\Biggr] = \sum_{a_{p,1}+\mathellipsis+a_{p,n}<l}\Pr\Bigl[p^{a_{p,j}} \mid\mid r_{1j},\: \forall p,j\Bigr]\\
 		&=\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\quad\prod_{j=1}^{n}\Pr\Bigl[p^{a_{p,j}} \mid\mid r_{1j} \text{, for all } p\in Q\Bigr],  
 	\end{align*}
@@ -860,32 +854,31 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 	Using the inclusion exclusion principle, 
 	\begin{align*}
 		|\{(r_{1j}): p^{a_{{p,j}}}\mid\mid r_{1j} \: \forall p\in Q\}| = \\
-		\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor-\sum_{p\in Q}\Biggl\lfloor \frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor+\mathellipsis+(-1)^{|Q|}\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}+1}}\Biggr\rfloor
+		\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor-\sum_{p\in Q}\Biggl\lfloor \frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor+\mathellipsis+(-1)^{|Q|}\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}+1}}\Biggr\rfloor.
 	\end{align*}
 	
-	Next, we form an estimate of the quantity by taking the difference of the last two terms. 
-	
+	Next, we form an estimate of the quantity by taking the difference of the last two terms, 
 	\begin{align*}
 		\Biggl\lfloor \frac{N}{\prod {p\in Q} p^{a_{p,j}}} \Biggr\rfloor - \Biggl\lfloor \frac{N}{\prod {p\in Q} p^{a_{p,j}+1}} \Biggr\rfloor =\\
 		\frac{N}{\prod {p\in Q} p^{a_{p,j}}} + O(1) -  \frac{N}{\prod {p\in Q} p^{a_{p,j}+1}} + O(1) =\\
 		N\prod_ {p\in Q}\Biggl[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} \Biggr]+ \frac{2}{N}O(1)=\\
-		N\prod_ {p\in Q}\Biggl[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} \Biggr]+ O(1)
+		N\prod_ {p\in Q}\Biggl[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} \Biggr]+ O(1).
 	\end{align*}
 	
 	Thus we have,
 	\begin{align*}
 		\Pr\Biggl[p^k\nmid \prod_{j=1}^{n}r_{1j},\: \forall p\in Q\Biggr] =\\
 		\prod_{p\in Q} \Biggl(\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\prod_{j=1}^{n}\frac{p-1}{p^{a_{p,j}+1}}\Biggr)+O\Biggl(\frac{1}{N}\Biggr) = \\
-		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr)
+		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr).
 	\end{align*}
 	
-	Finally, invoking an earlier result yields
+	Invoking an earlier result yields
 	\begin{align*}
 		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl[\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr)=\\
 		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl(1+\frac{_nH_1}{p}+\mathellipsis+\frac{_nH_{k-1}}{p^{k-1}}\Biggr)\Biggr]+O\Biggl(\frac{1}{N}\Biggr)
 	\end{align*}
 	
-	Finally, substitute these results into the original expression and repeatedly factoring allows us to simplify this as done previously. Letting $N\to \infty$, we see that the error approaches 0 as desired. 
+	Finally, substitute these results into the original expression and simplify. Letting $N\to \infty$, we see that the error approaches 0 as desired.
 \end{proof}
 
 
@@ -897,7 +890,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 
 \bibitem{Apostol} T. M. Apostol, Introduction to Analytic Number Theory, Springer, 1976.
 
-\bibitem{Bai} S. Bai, Polynomial Selection for the Number Field Sieve. 2011. Australian National University, PhD dissertation. https://maths-people.anu.edu.au/~brent/pd/Bai-thesis.pdf
+\bibitem{Bai} S. Bai, Polynomial Selection for the Number Field Sieve. 2011. Australian National University, PhD dissertation. \url{https://maths-people.anu.edu.au/~brent/pd/Bai-thesis.pdf}
 
 \bibitem{Benkoski} S. J. Benkoski. The probability that $k$ positive integers are relatively $r$-prime, Journal of Number Theory, \textbf{8}: 218–223, 1976.
 
@@ -914,7 +907,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 \bibitem{Marcus} D.A. Marcus, Number Fields. 2nd Edition, Springer, 2018.
 
 \bibitem{Naccache} D. Naccache and I. Shparlinski, Divisibility, Smoothness and Cryptographic Applications,
-https://eprint.iacr.org/2008/437.pdf. 
+\url{https://eprint.iacr.org/2008/437.pdf}. 
 
 \bibitem{Nymann} J. E. Nymann, On the Probability that $k$ Positive Integers are Relatively Prime, Journal of Number Theory, \textbf{4}: 469-473, 1972.
 
