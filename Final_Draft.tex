@@ -265,7 +265,7 @@ We now provide concise proofs for the probability that the gcd and k-gcd are B-F
 \begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{\bm{$B$}-friable (\bm{$B$}-smooth)} if $x$ has no prime divisor greater than $B$. 
 \end{definition}
 
-\noindent \textbf{Example:} Let $B = 20$. Then $57$ is $20$-friable, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20. However, $46$ is not $20$-friable, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
+\noindent \textbf{Example:} Let $B = 20$. Then $57$ is $20$-friable, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20. However $46$ is not $20$-friable, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
 
 \vspace{.1 in}
 
@@ -507,8 +507,7 @@ We have found the probability that the $k$-GCD of products of random integers is
 		g_N(l) &\leq \frac{(N^n - |\{r_{11} : p_l^k \nmid r_{11}\}|^n)^m}{N^{mn}}\\
 		&= \Big[1 - \Big(1 - \frac{1}{N} \Big\lfloor \frac{N}{p_l^k}\Big\rfloor\Big)^n\Big]^m\\
 		&\leq \Big[1 - \Big(1 - \frac{1}{p_l^k}\Big)^n\Big]^m\\
-            &\leq \Big[1 - \Big(1 - \frac{1}{p_l}\Big)^n\Big]^m\\
-		&\leq \frac{n^m}{p_l^{km}},\end{align*}
+        &\leq \frac{n^m}{p_l^{km}},\end{align*}
 	where the last inequality directly follows from Bernoulli's inequality. Moreover $\sum_{l=1}^{\infty} g(l)$ converges, because we can bound this series from above with a convergent $p$-series (noting that $m \geq 2$):
 	$$\sum_{l=1}^{\infty} g(l) = n^m \sum_{l=1}^{\infty} \frac{1}{p_l^{km}} < n^m \sum_{j=1}^{\infty} \frac{1}{j^{km}}.$$
 	
@@ -564,10 +563,7 @@ $$\zeta_{\mathcal{O}}(s)=\prod_{\f{p \text{ prime}}}(1-\f{N(p)}^{-s})^{-1}.$$
 	As with the Riemann Zeta Function, the Dedekind Zeta Function converges for all \(\text{Re} (s)>1\).
 \end{remark}
 
-\begin{definition} Define the M\"obius Function for Algebraic Number Rings by: 
-	\begin{equation*}
-		\mu:\mathcal{O}\to \{0,\pm 1\} \notag
-	\end{equation*}
+\begin{definition} For an algebraic number ring $\mathcal{O}$, let the M\"obius function $\mu:\mathcal{O}\to \{0,\pm 1\}$ be given as
 	\begin{equation*}
 		\mu(\f{a})=\begin{cases}
 			1 & \text{if \(\f{\mathfrak{N}(a)}=1\)}\\
@@ -577,7 +573,7 @@ $$\zeta_{\mathcal{O}}(s)=\prod_{\f{p \text{ prime}}}(1-\f{N(p)}^{-s})^{-1}.$$
 	\end{equation*}
 \end{definition}
 
-\begin{definition} Fix $r \in \mathbb{N}$. We say that nonzero ideals \(f{a}_1,\f{a}_2,\mathellipsis,\f{a}_k \subseteq \mathcal{O}\)  are \textbf{relatively \(r\)-prime} if \(\f{a}_1,\f{a}_2,\mathellipsis,\f{a}_k\not\subseteq \f{b}^r\) for any nonzero and proper ideal \(\f{b}\).
+\begin{definition} Fix $r \in \mathbb{N}$. We say that nonzero ideals \(\f{a}_1,\f{a}_2,\mathellipsis,\f{a}_k \subseteq \mathcal{O}\)  are \textbf{relatively \(r\)-prime} if \(\f{a}_1,\f{a}_2,\mathellipsis,\f{a}_k\not\subseteq \f{b}^r\) for any nonzero and proper ideal \(\f{b}\).
 \end{definition}
 
 \begin{definition} \label{H}
@@ -586,8 +582,10 @@ $$\zeta_{\mathcal{O}}(s)=\prod_{\f{p \text{ prime}}}(1-\f{N(p)}^{-s})^{-1}.$$
 
 Note that $n$ need not be an integer. The following theorem provides an estimate that we repeatedly use in the derivations that follow. A proof of this can be found in \cite{Marcus}.
 
-\begin{theorem} There is a positive constant \(c\) such that \(H(n)=cn+O(n^{1-\epsilon})\) where \(\epsilon = [K : \mathbb{Q}]^{-1}\) \label{H-estimate}. If \(K=\mathbb{Q}\), as in the case for the integers, then \(H\) reduces to the floor function.
+\begin{theorem} There exists $c > 0$ such that $H(n)=cn+O(n^{1-\epsilon})$ where $\epsilon = [K : \mathbb{Q}]^{-1}$. \label{H-estimate}
 \end{theorem}
+
+\noindent \textbf{Remark:} If $K=\mathbb{Q}$ so that $\mathcal{O} = \mathbb{Z}$, then $H$ reduces to the floor function. 
 
 \section{Probability that the GCD of products of algebraic integers is B-Friable}
 
@@ -710,7 +708,7 @@ We now give a less cumbersome representation for $Q_{p^k}(N)$ by estimating the 
 \begin{proof}
 	Applying Marcus' estimate to the result from the previous lemma, for some $c,\epsilon>0$, we obtain
 	\begin{align*} 
-		Q_{p^k}(N) &= \sum_{a_1+...+a_n < k} H(N)^n\Big[\prod_{j=1}^n \frac{1}{\f{N}(\f{p})^j}-\frac{1}{\f{N}(\f{p})^{j+1}}+O\bigg(\frac{1}{N^\epsilon}\bigg)\Big]\\ 
+		Q_{\f{p}^k}(N) &= \sum_{a_1+...+a_n < k} H(N)^n\Big[\prod_{j=1}^n \frac{1}{\f{N}(\f{p})^j}-\frac{1}{\f{N}(\f{p})^{j+1}}+O\bigg(\frac{1}{N^\epsilon}\bigg)\Big]\\ 
 		&= H(N)^n\Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \sum_{a_1+...+a_n < k} \frac{1}{\f{N}(\f{p})^{a_1 + ... + a_n}} + O(1). 
 	\end{align*} 
 	\noindent Next for each non-negative integer less than $k$, there are \small${}_nH_j = \binom{n-1+j}{j}\ $ \normalsize  solutions in non-negative integers to the equation $a_1+...+a_n = j$. Hence we conclude that
@@ -745,7 +743,7 @@ Now, we are ready to state and prove the main theorem of this section.
 We have so far found the probability that the $k$-GCD of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
 
 \begin{theorem}
-Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $k\text{-}\gcd(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-friable converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
+Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-friable converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
 \begin{proof}
@@ -764,7 +762,7 @@ Therefore, it follows that
 	g_N(l) &\leq \frac{(H(N)^n - |\{\f{a}_{11} : \f{p}_l^k \nmid \f{a}_{11}\}|^n)^m}{H(N)^{mn}}\\
 	&\leq \Big[1 - \Big(1 - \frac{1}{H(N)}  H\Big(\frac{N}{\f{N}(\f{p}_l)^k}\Big)\Big)^n\Big]^m\\
 	&\leq \Big[1 - \Big(1 - \Big(\frac{1}{\f{N}(\f{p}_l)^k}+\frac{A}{N^{\varepsilon}}\Big)\Big)^n\Big]^m \text{ for some } A>0\\
-	&\leq (1-(1-\frac{2}{\f{N}(\f{p}_l)^k})^n)^m,
+	&\leq \Big(1 - \Big(1 - \frac{2}{\f{N}(\f{p}_l)^k}\Big)^n \Big)^m,
 \end{align*}
 the latter expression is bounded above by $g(l)=\frac{(2n)^m}{\f{N}(\f{p}_l)^{km}}$ from Bernoulli's inequality in the form $1-(1-x)^t\leq xt$ for $t\geq 1$ and $0\leq x \leq 1$.
 
@@ -816,7 +814,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 \end{proof}
 
 \begin{theorem}
-	Let \(p_1, p_2,\mathellipsis\) be the prime numbers larger than \(B\) in increasing order,
+	Let \(p_1, p_2,\mathellipsis\) be the prime numbers larger than \(B\) in increasing order. Then,
 	\begin{equation*}
 		\lim\limits_{N\to\infty} \frac{T_k(l,n)}{N^{mn}}=\prod_{i=1}^l\Biggl(1-\Biggl[1-\Biggl(1-\frac{1}{p_i}\Biggr)^n\Biggl(1+\frac{nH_1}{p_i}+\mathellipsis+\frac{nH_{k-1}}{p_i^{k-1}}\Biggr)\Biggr]\Biggr)
 	\end{equation*}
@@ -831,7 +829,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 	Let \(p^a \mid\mid x\) denote \(p^a\mid x\) and \(p^{a+1}\nmid x\) and let \(a_p,j\in Q\) and \(1\leq j \leq n\).
 	
 	\begin{remark}
-		Suppose a tuple satisfies \(a_{p,1}+\mathellipsis+a_{p,n}<k\) with \(a_{p,1}+\mathellipsis+a_{p,n}+1=k\), then \(||\) guarantees \(p^k \nmid x\).
+		Suppose a tuple satisfies \(a_{p,1}+\mathellipsis+a_{p,n}<k\) with \(a_{p,1}+\mathellipsis+a_{p,n}+1=k\), then using the exactly divides symbol \(||\) guarantees \(p^k \nmid x\).
 	\end{remark} 
 	
 	Next, we count every composition \(a_{p,1}+\mathellipsis+a_{p,n}<k\) for \(p^{a_{p,j}}\) that divides the quantity. 
@@ -845,33 +843,30 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 		&=\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\quad\prod_{j=1}^{n}\Pr\Bigl[p^{a_{p,j}} \mid\mid r_{1j} \text{, for all } p\in Q\Bigr],  
 	\end{align*}
 	
-	where the last term utilizes the product rule for probability. This allows us to count the innermost quantity. 
+	\noindent where the last term utilizes the product rule for probability. This allows us to count the innermost quantity. 
 	
-	Using the inclusion exclusion principle, 
+	Using the inclusion-exclusion principle, 
 	\begin{align*}
-		|\{(r_{1j}): p^{a_{{p,j}}}\mid\mid r_{1j} \: \forall p\in Q\}| = \\
-		\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor-\sum_{p\in Q}\Biggl\lfloor \frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor+\mathellipsis+(-1)^{|Q|}\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}+1}}\Biggr\rfloor.
+		&|\{(r_{1j}): p^{a_{{p,j}}}\mid\mid r_{1j} \: \forall p\in Q\}|\\ &= \Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor-\sum_{p\in Q}\Biggl\lfloor \frac{N}{\prod_{p\in Q}p^{a_{p,j}}}\Biggr\rfloor+\mathellipsis+(-1)^{|Q|}\Biggl\lfloor\frac{N}{\prod_{p\in Q}p^{a_{p,j}+1}}\Biggr\rfloor.
 	\end{align*}
 	
-	Next, we form an estimate of the quantity by taking the difference of the last two terms, 
+	Next, we form an estimate of the quantity by taking the difference of the last two terms. We find that
 	\begin{align*}
-		\Biggl\lfloor \frac{N}{\prod {p\in Q} p^{a_{p,j}}} \Biggr\rfloor - \Biggl\lfloor \frac{N}{\prod {p\in Q} p^{a_{p,j}+1}} \Biggr\rfloor =\\
-		\frac{N}{\prod {p\in Q} p^{a_{p,j}}} + O(1) -  \frac{N}{\prod {p\in Q} p^{a_{p,j}+1}} + O(1) =\\
-		N\prod_ {p\in Q}\Biggl[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} \Biggr]+ \frac{2}{N}O(1)=\\
+		\Biggl\lfloor \frac{N}{\prod_{p\in Q} p^{a_{p,j}}} \Biggr\rfloor - \Biggl\lfloor \frac{N}{\prod_{p\in Q} p^{a_{p,j}+1}} \Biggr\rfloor &=
+		\frac{N}{\prod_{p\in Q} p^{a_{p,j}}} -  \frac{N}{\prod_{p\in Q} p^{a_{p,j}+1}} + O(1)\\&=
 		N\prod_ {p\in Q}\Biggl[ \frac{1}{ p^{a_{p,j}}}  -  \frac{1}{ p^{a_{p,j}+1}} \Biggr]+ O(1).
 	\end{align*}
 	
-	Thus we have,
+	Putting this all together, we obtain
 	\begin{align*}
-		\Pr\Biggl[p^k\nmid \prod_{j=1}^{n}r_{1j},\: \forall p\in Q\Biggr] =\\
-		\prod_{p\in Q} \Biggl(\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\prod_{j=1}^{n}\frac{p-1}{p^{a_{p,j}+1}}\Biggr)+O\Biggl(\frac{1}{N}\Biggr) = \\
-		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr).
+	\Pr\Biggl[p^k\nmid \prod_{j=1}^{n}r_{1j},\: \forall p\in Q\Biggr] &= \prod_{p\in Q} \Biggl(\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\prod_{j=1}^{n}\frac{p-1}{p^{a_{p,j}+1}}\Biggr)+O\Biggl(\frac{1}{N}\Biggr)\\
+		&=\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr).
 	\end{align*}
 	
 	Invoking an earlier result yields
 	\begin{align*}
-		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl[\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr)=\\
-		\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl(1+\frac{_nH_1}{p}+\mathellipsis+\frac{_nH_{k-1}}{p^{k-1}}\Biggr)\Biggr]+O\Biggl(\frac{1}{N}\Biggr)
+		&\prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl[\sum_{a_{p,1}+\mathellipsis+a_{p,n}<k}\frac{1}{p^{a_{p,1}+\mathellipsis+a_{p,n}}}\Biggr]+O\Biggl(\frac{1}{N}\Biggr)\\
+		&= \prod_{p\in Q}\Biggl[\Biggl(1-\frac{1}{p}\Biggr)^n\Biggl(1+\frac{_nH_1}{p}+\mathellipsis+\frac{_nH_{k-1}}{p^{k-1}}\Biggr)\Biggr]+O\Biggl(\frac{1}{N}\Biggr).
 	\end{align*}
 	
 	Finally, substitute these results into the original expression and simplify. Letting $N\to \infty$, we see that the error approaches 0 as desired.
