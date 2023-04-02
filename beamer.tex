@@ -1,0 +1,264 @@
+\documentclass[11pt,xcolor={dvipsnames}]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usetheme{Copenhagen}
+\usepackage{bm}
+\newcommand{\f}[1]{\mathfrak{#1}}
+\author{Adrian Vazquez}
+
+%\setbeameroption{show notes}
+
+\makeatother
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.75\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatletter
+%\setbeamertemplate{navigation symbols}{}
+
+
+\begin{document}
+	%\author{Adrian Vazquez}
+	\title[Probability that the GCD of Products of Ideals is B-Friable]{The Probability that the GCD of Products of Ideals in a Number Ring is B-Friable}
+	%\subtitle{}
+	%\logo{}
+	%\institute{}
+	%\date{}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	%\setbeamertemplate{navigation symbols}{}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Introduction}
+		\begin{definition}
+			For a fixed integer $r>1$, we say that the integers $m_1, m_2, \mathellipsis, m_k$ are relatively $r$-prime if they have no common factor of the form $n^r$ for any integer $n > 1$. %When $r = 1$, this is the definition of being relatively prime.
+		\end{definition}
+		\begin{theorem}[Benkoski's Theorem]
+			Fix $k$, $r\in \mathbb{N}$ not both equal to 1, and let $q(n)$ denote the number of ordered $k$-tuples of positive integers less than or equal to $n$ that are relatively $r$-prime. Then, $\lim\limits_{n\to\infty} \frac{q(n) }{n^k}=\frac{1}{\zeta(rk)}$.
+		\end{theorem}
+		\begin{enumerate}
+                \item Sittinger provided a more concise proof and extension to algebraic integers.
+                \item Apply techniques for more concise GCD proofs.
+                \item Extend GCD proofs to algebraic integers.
+		\end{enumerate}
+	\end{frame}
+
+
+
+	\begin{frame}
+		\frametitle{B-Smooth (B-Friable)}
+		\begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{\bm{$B$}-friable (\bm{$B$}-smooth)} if $x$ has no prime divisor greater than $B$. 
+		\end{definition}
+		\begin{example}
+			Let $B = 20$. Then $57$ is $20$-friable, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20.\newline
+			
+			However $46$ is not $20$-friable, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
+		\end{example}
+		\note{B-Friable is the newer name for the definition, B-Smooth slightly older, oldest cryptography papers don't mentioned either.}
+	\end{frame}
+
+
+	\begin{frame}
+		\begin{theorem}[Divisibility by first $l$ primes]
+			Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. The probability of the GCD of products of random positive integers is not divisible by the first $l$ primes greater than $B$ is given by
+			$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n\Big)^m\Big].$$
+		\end{theorem}
+			\begin{proof}
+		\begin{enumerate}
+			\item Use counting arguments to construct:
+			$\frac{N^{mn} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p}\Big\rfloor\Big)^n\Big)^m}{N^{mn}}$
+			\item Apply estimate: $\frac{1}{n} \Big\lfloor \frac{n}{k} \Big\rfloor = \frac{1}{k} + O\Big(\frac{1}{n}\Big)$
+			\item Divisibility by finitely many primes yields independent events.
+			\item Take limit $N \to \infty$. 
+		\end{enumerate}
+		\end{proof}
+	\end{frame}
+
+	\begin{frame}
+		\begin{theorem}
+			Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+			$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big].$$
+		\end{theorem}
+		\begin{proof}
+			\begin{enumerate}
+				\item Use Lebesgue Dominated Convergence Theorem for Series on previous theorem.
+				\item Bounded above by a convergent $p$-series.
+				\item Yields $ 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big].$
+			\end{enumerate}
+		\end{proof}
+	\end{frame}
+
+	\begin{frame}
+		\begin{definition} Fix a positive integer $k$. The \textbf{$k$-GCD} of $n$ nonzero integers $x_1, ..., x_n$, written $k\text{-}\gcd(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{\text{th}}$ power divides each of $x_1, x_2, ..., x_n$.
+		\end{definition}	
+	
+		\begin{definition} When $k\text{-}\gcd(x_1,x_2,\mathellipsis,x_n)=1$ we say that  $x_1,x_2,\mathellipsis,x_n$ are \textbf{relatively $k$-prime}.
+		\end{definition}
+		
+		\begin{alertblock}{Remark}
+			As $k$ varies, it is possible that the $k$-GCD of a set of nonzero integers can change. 
+		\end{alertblock}
+
+	\end{frame}
+
+	\begin{frame}
+		\begin{theorem}
+			Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. The probability of the $k$-GCD of products of random integers is not divisible by the first $l$ primes greater than $B$ is given by 
+			$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \textcolor{PineGreen}{\Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)}\Big)^m\Big].$$
+		\end{theorem}
+	
+		\begin{proof}
+			\begin{enumerate}
+				\item Similar to previous case.
+				\item Use
+				$\Big\lfloor\frac{N}{p^j}\Big\rfloor - \Big\lfloor\frac{N}{p^{j+1}}\Big\rfloor$ to count integers divisible exactly by $p^j$.
+				\item Applying stars and bars yields the \textcolor{PineGreen}{green product}.
+			\end{enumerate}
+		\end{proof}
+	\end{frame}
+
+	\begin{frame}
+		\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $k\text{-}\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+			$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].$$
+		\end{theorem}
+	
+		\begin{proof}
+			Nearly identical to GCD case.
+		\end{proof}
+	\end{frame}
+
+	\begin{frame}
+	\begin{theorem}
+		Fix positive integers $B$ and $N$ and a number ring $\mathcal{O}$. Let $\mathfrak{p}_1, \mathfrak{p}_2, ...$ be the prime ideals in $\mathcal{O}$ with norm greater than $B$ arranged in non-decreasing order by norm. Then, the probability of the GCD of products of random ideals is not divisible by the first $l$ prime ideals greater than $B$ is given by 
+		$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{\mathfrak{N}(\mathfrak{p}_i)}\Big)^n\Big)^m\Big].$$
+	\end{theorem}
+	
+	\begin{proof}
+		\begin{enumerate}
+			\item Use counting argument: $\frac{H(N)^{nm}-\Big[H(N)^n - \Big(H(N) - H\Big(\frac{N}{\f{N(p)}}\Big)\Big)^n\Big]^m}{H(N)^{nm}}$
+			\item Apply estimate: $\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big).$
+			\item Divisibility by finitely many primes yields independent events.
+			\item Take limit $N \to \infty$.
+		\end{enumerate}
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\begin{theorem}
+		The probability that the GCD of products of random ideals of algebraic integers in a given number ring $\mathcal{O}$ is $B$-Friable converges to
+		$$\prod_{\f{N}(\f{p})>B}\Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big].$$
+	\end{theorem}
+	\begin{proof}
+		\begin{enumerate}
+			\item Start with previous theorem.
+			\item Apply Lebesgue Dominated Convergence Theorem for Series
+			\item Bounded above by constant multiple of Dedekind zeta function
+			\item Yielding $1 - \prod_{\mathfrak{N}(\mathfrak{p}) > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\mathfrak{N}(\mathfrak{p})}  \Big)^n\Big)^m\Big].$
+		\end{enumerate}
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\begin{theorem}
+		Fix positive integers $B$ and $N$, and let $\f{p}_1, \f{p}_2, ...$ be the prime ideals in a number ring $\mathcal{O}$ with norm greater than $B$ in increasing order. Then, the probability of the $k$-gcd of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first $l$ prime ideals with norm greater than $B$ is given by 
+		$$\prod_{i=1}^{l} \Big[1 - \Big(1 - \Big(1-\frac{1}{\mathfrak{N}(\f{p}_i)}\Big)^n \textcolor{PineGreen}{\Big(1+\frac{{}_nH_1}{\f{N}(\f{p}_i)}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p}_i)^{k-1}}\Big)}\Big)^m\Big].$$
+	\end{theorem}
+	
+	\begin{proof}
+		\begin{enumerate}
+			\item Similar to 1-GCD case.
+			\item Use $H\bigg(\frac{N}{\f{N}(\f{p})^j}\bigg) - H\bigg(\frac{N}{\f{N}(\f{p})^{j+1}}\bigg)$ to count the ideals where $\f{N}(\f{p}^j)$ divides the norm of the ideal exactly.
+			\item Apply stars and bars to yield \textcolor{PineGreen}{green product.}
+		\end{enumerate}
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\begin{theorem}
+		\frametitle{GCD of Random Algebraic Integers is B-Friable}
+		Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-friable converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
+	\end{theorem}
+	
+	\begin{proof}
+		Similar to 1-GCD case. 
+	\end{proof}
+	
+	\begin{alertblock}{Remarks}
+		\begin{enumerate}
+			\item Set $\mathcal{O}=\mathbb{Z}$ to yield case for integers.
+			\item Set $k=1$ to yield 1-GCD case.
+			\item Alternative proof using the Inclusion-Exclusion principle.
+		\end{enumerate}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{B-smooth Numbers in Integer Factorization}
+	B-smooth numbers play a critical role in \textbf{integer factorization algorithms}.
+	\begin{enumerate}
+		\item Dixon's Random Squares (1981)
+		\item Pomerance's Quadratic Number Sieve (1983)
+		\item Pollard's General Number Sieve (1996)
+	\end{enumerate}
+
+	\begin{alertblock}{Remark}
+		There is no known efficient non-quantum integer factoring algorithm.
+	\end{alertblock}
+	\note{Also, can be exploited to crack weak crypto, strong hashing, primality testing, ECF}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Encryption and the Integer Factorization Problem}
+	How are \textbf{encryption} and integer factorization algorithms related?
+	\begin{enumerate}
+		\item Some encryption algorithms rely on the difficulty of solving the integer factorization problem (e.g. \textbf{RSA}).
+		\item Integer factorization algorithms help determine if the difficulty of the problem has been reduced.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{RSA Challenge}
+	\begin{enumerate}
+		\item A challenge issued by RSA Laboratories in 1991 to encourage research in computational number theory.
+	
+		\item The following 130 digit (430 bits) RSA number  has two prime factors (Solved using Quadratic Number Sieve).
+	\end{enumerate}
+	\begin{example}
+		 \begin{align*}
+			\text{RSA-}130\text{: } &18070820886874048059516561644059055662\\
+			&781025167694013491701270214500566625402440
+		\end{align*}
+	\end{example}
+
+	\note{15\% Faster than the previous record holder would have taken.}
+	\note{MIPS = Million Instructions Per Second, MIPS-Year is standard way of measuring performance in Cryptography research.}
+\end{frame}
+
+	\begin{frame}
+		\frametitle{How hard is encryption today?}
+		\begin{enumerate}
+			\item RSA-250 (829 bits, 250 digits) was factored in 2020 using the Quadratic Number Sieve.
+			\item The recommended RSA key size is 3072 bits (925 digits), but 4096 bit (1233 digits) keys are also common.
+			\item Quantum computers have not reached the required complexity to solve the RSA problem.
+		\end{enumerate}
+	\begin{alertblock}{Key Take Away}
+		 Knowledge of B-Smooth numbers $\iff$ Efficient Factorization Algorithms $\iff$ Stronger encryption algorithms! 
+	\end{alertblock}
+	\end{frame}
+
+\end{document}
