@@ -31,7 +31,7 @@
 
 \begin{document}
 	%\author{Adrian Vazquez}
-	\title[Probability that the GCD of Products of Ideals is B-Friable]{The Probability that the GCD of Products of Ideals in a Number Ring is B-Friable}
+	\title[Probability that the GCD of Products of Ideals is $B$-smooth]{The Probability that the GCD of Products of Ideals in a Number Ring is $B$-smooth}
 	%\subtitle{}
 	%\logo{}
 	%\institute{}
@@ -58,16 +58,14 @@
 		\end{enumerate}
 	\end{frame}
 
-
-
 	\begin{frame}
 		\frametitle{B-Smooth (B-Friable)}
-		\begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{\bm{$B$}-friable (\bm{$B$}-smooth)} if $x$ has no prime divisor greater than $B$. 
+		\begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{\bm{$B$}-smooth} (\textbf{\bm{$B$}-friable}) if $x$ has no prime divisor greater than $B$. 
 		\end{definition}
 		\begin{example}
-			Let $B = 20$. Then $57$ is $20$-friable, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20.\newline
+			Let $B = 20$. Then $57$ is $20$-smooth, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20.\newline
 			
-			However $46$ is not $20$-friable, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
+			However $46$ is not $20$-smooth, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
 		\end{example}
 		\note{B-Friable is the newer name for the definition, B-Smooth slightly older, oldest cryptography papers don't mentioned either.}
 	\end{frame}
@@ -82,7 +80,7 @@
 		\begin{enumerate}
 			\item Use counting arguments to construct:
 			$\frac{N^{mn} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p}\Big\rfloor\Big)^n\Big)^m}{N^{mn}}$
-			\item Apply estimate: $\frac{1}{n} \Big\lfloor \frac{n}{k} \Big\rfloor = \frac{1}{k} + O\Big(\frac{1}{n}\Big)$
+			\item Apply the estimate $\frac{1}{n} \Big\lfloor \frac{n}{k} \Big\rfloor = \frac{1}{k} + O\Big(\frac{1}{n}\Big)$.
 			\item Divisibility by finitely many primes yields independent events.
 			\item Take limit $N \to \infty$. 
 		\end{enumerate}
@@ -91,14 +89,14 @@
 
 	\begin{frame}
 		\begin{theorem}
-			Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+			Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-smooth converges (as $N \to \infty$) to
 			$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big].$$
 		\end{theorem}
 		\begin{proof}
 			\begin{enumerate}
-				\item Use Lebesgue Dominated Convergence Theorem for Series on previous theorem.
 				\item Bounded above by a convergent $p$-series.
-				\item Yields $ 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big].$
+                \item Use Lebesgue Dominated Convergence Theorem for Series on previous theorem.
+				\item This yields $ 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big].$
 			\end{enumerate}
 		\end{proof}
 	\end{frame}
@@ -133,7 +131,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $k\text{-}\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+		\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $k\text{-}\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-smooth converges (as $N \to \infty$) to
 			$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].$$
 		\end{theorem}
 	
@@ -160,15 +158,15 @@
 
 \begin{frame}
 	\begin{theorem}
-		The probability that the GCD of products of random ideals of algebraic integers in a given number ring $\mathcal{O}$ is $B$-Friable converges to
+		The probability that the GCD of products of random ideals of algebraic integers in a given number ring $\mathcal{O}$ is $B$-smooth converges to
 		$$\prod_{\f{N}(\f{p})>B}\Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big].$$
 	\end{theorem}
 	\begin{proof}
 		\begin{enumerate}
 			\item Start with previous theorem.
-			\item Apply Lebesgue Dominated Convergence Theorem for Series
-			\item Bounded above by constant multiple of Dedekind zeta function
-			\item Yielding $1 - \prod_{\mathfrak{N}(\mathfrak{p}) > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\mathfrak{N}(\mathfrak{p})}  \Big)^n\Big)^m\Big].$
+                \item Bounded above by constant multiple of Dedekind zeta function.
+			\item Apply Lebesgue Dominated Convergence Theorem for Series.
+				\item This yields $1 - \prod_{\mathfrak{N}(\mathfrak{p}) > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\mathfrak{N}(\mathfrak{p})}  \Big)^n\Big)^m\Big].$
 		\end{enumerate}
 	\end{proof}
 \end{frame}
@@ -190,8 +188,8 @@
 
 \begin{frame}
 	\begin{theorem}
-		\frametitle{GCD of Random Algebraic Integers is B-Friable}
-		Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-friable converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
+		\frametitle{GCD of Random Algebraic Integers is B-smooth}
+		Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-smooth converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
 	\end{theorem}
 	
 	\begin{proof}

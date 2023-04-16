@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 
-\def\thesistitle{The Probability that the GCD of Products of Ideals in a Number Ring is B-Friable}
+\def\thesistitle{The Probability that the GCD of Products of Ideals in a Number Ring is B-smooth}
 \def\name{Adrian Vazquez}
 \newif \ifshort
 
@@ -169,7 +169,7 @@ by
 {\bf Acknowledgements}
 \end{center}
 
-\todo[inline,color=red]{Acknowledgements}
+
 \newpage
 
 \pagestyle{plain}
@@ -237,17 +237,17 @@ We have now seen that finding efficient ways of identifying $B$-smooth numbers i
 
 Smooth numbers also have applications, including: cracking weak cryptography schemes, creating strong hashing functions, primality testing, and error correcting functions \cite{Naccache}.
 
-\section{Probability that the GCD of products of positive integers is  B-Friable}
-We now provide concise proofs for the probability that the GCD and $k$-GCD are $B$-Friable by using counting arguments. Appendix A contains detailed versions of Cheon and Kim's original proofs using the inclusion-exclusion principle. %Hyperref? 
+\section{Probability that the GCD of products of positive integers is  B-smooth}
+We now provide concise proofs for the probability that the GCD and $k$-GCD are $B$-smooth by using counting arguments. Appendix A contains detailed versions of Cheon and Kim's original proofs using the inclusion-exclusion principle. %Hyperref? 
 
 \begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{\bm{$B$}-smooth (\bm{$B$}-friable)} if $x$ has no prime divisor greater than $B$. 
 \end{definition}
 
-\noindent \textbf{Example:} Let $B = 20$. Then $57$ is $20$-friable, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20. However $46$ is not $20$-friable, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
+\noindent \textbf{Example:} Let $B = 20$. Then $57$ is $20$-smooth, because $57 = 2 \cdot 19$ and both 2 and 19 are less than 20. However $46$ is not $20$-smooth, because $46= 2 \cdot 23$ and 23 is a prime number greater than 20.
 
 \vspace{.1 in}
 
-For the remainder of this section, we find the probability that the greatest common divisor (GCD) of $m$ products of $n$ positive integers (all randomly chosen in a uniform and independent manner) is $B$-friable.
+For the remainder of this section, we find the probability that the greatest common divisor (GCD) of $m$ products of $n$ positive integers (all randomly chosen in a uniform and independent manner) is $B$-smooth.
 
 \vspace{.1 in}
 
@@ -296,9 +296,9 @@ Now, we are ready to state and prove the main theorem of this section.
 	\noindent Finally letting $N \to \infty$ now gives us the desired result.
 \end{proof}
 
-We have found the probability that the GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this GCD is $B$-friable.
+We have found the probability that the GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this GCD is $B$-smooth.
 
-\begin{theorem} Suppose that each positive integer $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+\begin{theorem} Suppose that each positive integer $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-smooth converges (as $N \to \infty$) to
 	$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big].$$
 \end{theorem}
 
@@ -330,9 +330,9 @@ We have found the probability that the GCD of products of random integers is not
 	\noindent Then since $\displaystyle \sum_{k=1}^{\infty} \lim_{N \to \infty} g_N(k)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
 \end{proof}
 
-Having derived the probability that the GCD of products of randomly chosen positive integers is $B$-friable, we now find more convenient bounds for this product representation.
+Having derived the probability that the GCD of products of randomly chosen positive integers is $B$-smooth, we now find more convenient bounds for this product representation.
 
-\begin{theorem} The probability that $\gcd(\prod_{j=1}^n r_{1j}, ..., \prod_{j=1}^{n}r_{mj})$ is $B$-friable is bounded above by 
+\begin{theorem} The probability that $\gcd(\prod_{j=1}^n r_{1j}, ..., \prod_{j=1}^{n}r_{mj})$ is $B$-smooth is bounded above by 
 	$$\frac{1}{\zeta(m)}\prod_{p\leq B}\Big(1-\frac{1}{p^m}\Big)^{-1},$$
 	and is bounded below by 
 	$$\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m\Big] \cdot \prod_{\hat{n}<p\leq\hat{r}} \Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \frac{1}{\zeta(s)},$$
@@ -382,7 +382,7 @@ Having derived the probability that the GCD of products of randomly chosen posit
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%
-\section{Probability that the k-GCD of products of positive integers is  B-Friable}
+\section{Probability that the k-GCD of products of positive integers is  B-smooth}
 In this section we extend the previous results to the $k$-GCD, and in a similar fashion, begin with a more concise proof.
 
 \begin{definition} Fix a positive integer $k$. The \textbf{$k$-GCD} of $n$ nonzero integers $x_1, ..., x_n$, written $\gcd_k(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{\text{th}}$ power divides each of $x_1, x_2, ..., x_n$.
@@ -463,9 +463,9 @@ Now, we are ready to state and prove the main theorem of this section.
 	\noindent Letting $N \to \infty$ now gives us the desired result.
 \end{proof}
 
-We have found the probability that the $k$-GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
+We have found the probability that the $k$-GCD of products of random integers is not divisible by the first \(l\) primes greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random integers is not divisible by \textit{all} primes greater than $B$, thereby giving the probability that this $k$-GCD is $B$-smooth.
 
-\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd_k(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-friable converges (as $N \to \infty$) to
+\begin{theorem} Suppose that each $r_{ij}$ is chosen uniformly and independently from $\{1, 2, ..., N\}$. Then, the probability that $\gcd_k(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is $B$-smooth converges (as $N \to \infty$) to
 	$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
@@ -568,16 +568,16 @@ Note that $n$ need not be an integer. The following theorem provides an estimate
 
 \noindent \textbf{Remark:} If $K=\mathbb{Q}$ so that $\mathcal{O} = \mathbb{Z}$, then $H$ reduces to the floor function. 
 
-\section{Probability that the GCD of products of algebraic integers is B-Friable}
+\section{Probability that the GCD of products of algebraic integers is B-smooth}
 
-\begin{definition} Let $B$ be a fixed positive integer and $\mathcal{O}$ be an algebraic number ring. A nonzero ideal $\mathfrak{a}$ in $\mathcal{O}$ is \textbf{$B$-friable ($B$-smooth)} if $\mathfrak{a}$ has no prime ideal factor whose norm is greater than $B$. 
+\begin{definition} Let $B$ be a fixed positive integer and $\mathcal{O}$ be an algebraic number ring. A nonzero ideal $\mathfrak{a}$ in $\mathcal{O}$ is \textbf{$B$-smooth} (\textbf{$B$-friable}) if $\mathfrak{a}$ has no prime ideal factor whose norm is greater than $B$. 
 \end{definition}
 
 In the case where $\mathcal{O}$ is a PID, we can replace ideals with elements and check that the elements have no prime factors have absolute value of a norm greater than $B$.
 
 \noindent \textbf{Example:} Let $\mathcal{O} = \mathbb{Z}[i]$, the ring of Gaussian integers, and take $B =  15$. Then $7 + 6i$ is not 15-smooth, because its prime factorization is $(2+i)(4+i)$, and $N(4+i) = 17 > 15$. On the other hand, $9-3i$ is 15-smooth, because its prime factorization is $3(3 - i)$, and the norm of each of its prime factors is less than 15.
 
-For the remainder of this section, we are going to find the probability that the greatest common divisor (GCD) of $m$ products of $n$ nonzero ideals in an algebraic number ring $\mathcal{O}$ (all randomly chosen in a uniform and independent manner) is $B$-friable. 
+For the remainder of this section, we are going to find the probability that the greatest common divisor (GCD) of $m$ products of $n$ nonzero ideals in an algebraic number ring $\mathcal{O}$ (all randomly chosen in a uniform and independent manner) is $B$-smooth. 
 
 \vspace{.1 in}
 
@@ -628,7 +628,7 @@ Setting \(\mathcal{O}=\mathbb{Z}\), prime ideals are substituted for the prime i
 As in the case for the integers, this only provides the probability for the first \(l\) prime ideals greater than \(B\). Using the Dominated Convergence Theorem, we can take the limit as \(l\) approaches infinity.
 
 \begin{theorem}
-	The probability that the GCD of products of random ideals of algebraic integers in a given number ring $\mathcal{O}$ is $B$-Friable converges to
+	The probability that the GCD of products of random ideals of algebraic integers in a given number ring $\mathcal{O}$ is $B$-smooth converges to
 	$$\prod_{\f{N}(\f{p})>B}\Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big].$$
 \end{theorem}
 
@@ -659,7 +659,7 @@ As in the case for the integers, this only provides the probability for the firs
 \end{proof}
 
 
-\section{Probability that the k-GCD of products of algebraic integers is B-Friable}
+\section{Probability that the k-GCD of products of algebraic integers is B-smooth}
 
 \begin{definition} Fix a positive integer $k$. The \bm{$k\text{-}\gcd$} of $n$ prime ideals $\f{a}_1$, $\f{a}_2$,$\mathellipsis$, $\f{a}_n$ in a number ring $\mathcal{O}$, written $\gcd_k(\f{a}_1,\f{a}_2, \mathellipsis,\f{a}_n)$, is the largest prime ideal whose $k^{\text{th}}$ power divides each of $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$.
 \end{definition}	
@@ -726,10 +726,10 @@ Now, we are ready to state and prove the main theorem of this section.
 	\noindent Letting $N \to \infty$ now gives us the desired result.
 \end{proof}
 
-We have so far found the probability that the $k$-GCD of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-friable.
+We have so far found the probability that the $k$-GCD of products of random nonzero ideals in a number ring $\mathcal{O}$ is not divisible by the first \(l\) nonzero prime ideals greater than \(B\). We now use this result to find the probability that the $k$-GCD of products of random nonzero ideals is not divisible by \textit{all} non zero prime ideals with norm greater than $B$, thereby giving the probability that this $k$-GCD is $B$-smooth.
 
 \begin{theorem}
-Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-friable converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
+Suppose that each $\f{a}_{ij}$ is randomly, independently, and uniformly chosen from $\mathcal{O}$. The probability that $\gcd_k(\prod_{j=1}^{n}\f{a}_{ij},\mathellipsis,\prod_{j=1}^{n}\f{a}_{mj})$ is $B$-smooth converges as $N\to\infty$ to $$\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
 \begin{proof}
@@ -763,7 +763,7 @@ $$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = 1 - \prod_{\f{N}(\f{p}) > B} 
 \end{proof}
 
 \section{Appendix}
-\subsection{Probability that the GCD of products of positive integers is \texorpdfstring{$B$}{\mathbb{B}}-Friable using Inclusion-Exclusion}
+\subsection{Probability that the GCD of products of positive integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth using Inclusion-Exclusion}
 For purposes of comparison to the previous proof, we now show Cheong and Kim's original proof via the inclusion-exclusion principle in detail.
 \begin{theorem}
 	Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. If $X_l = \{p_1, p_2, ..., p_l\}$, then
@@ -789,7 +789,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 	$$T(l,N)=\sum_{P\subset X_l}{(-1)^{|P|}}\Bigg[\sum_{Q\subset P}(-1)^{|Q|}\Big(\sum_{R\subset Q}(-1)^{|R|}\Big\lfloor\frac{N}{\prod_{p\in R} p}\Big\rfloor\Big)^n\Bigg]^m.$$
 \end{proof}
 
-\subsection{Probability that the \texorpdfstring{$k$}{\mathbb{k}}-GCD of products of positive integers is \texorpdfstring{$B$}{\mathbb{B}}-Friable with Inclusion-Exclusion}
+\subsection{Probability that the \texorpdfstring{$k$}{\mathbb{k}}-GCD of products of positive integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth with Inclusion-Exclusion}
 
 \begin{theorem} Let $p$ be a prime number and $r_{ij}$ be nonzero integers for each $1 \leq i \leq m$ and $1 \leq j \leq n$. Then
 	$p \mid \gcd_k(\prod_{j=1}^{n}r_{1j},\mathellipsis,\prod_{j=1}^n r_{mj})$ if and only if $p^k \mid \prod_{j}r_{ij}$ for some $i$.
@@ -868,7 +868,7 @@ Thus,
 
 \bibitem{Benkoski} S. J. Benkoski. The probability that $k$ positive integers are relatively $r$-prime, Journal of Number Theory, \textbf{8}: 218–223, 1976.
 
-\bibitem{Cheon} J.H. Cheon and D. Kim, Probability that the $k$-GCD of products of positive integers is $B$-friable, Journal of Number Theory, \textbf{168}: 72-80, 2016.
+\bibitem{Cheon} J.H. Cheon and D. Kim, Probability that the $k$-GCD of products of positive integers is $B$-smooth, Journal of Number Theory, \textbf{168}: 72-80, 2016.
 
 \bibitem{Dirichlet} P.G.L. Dirichlet, \"{U}ber die Bestimmung der mittleren Werthe in der Zahlentheorie, Abhandlungen der K\"{o}niglich Preussischen Akademie der Wissenchaften, \textbf{2}: 69-83, 1849.
 
