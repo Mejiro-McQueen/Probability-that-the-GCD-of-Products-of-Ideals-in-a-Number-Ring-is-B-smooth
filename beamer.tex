@@ -45,8 +45,8 @@
 
 	\begin{frame}
 		\frametitle{Introduction}
-		\begin{definition}
-			For a fixed integer $r>1$, we say that the integers $m_1, m_2, \mathellipsis, m_k$ are relatively $r$-prime if they have no common factor of the form $n^r$ for any integer $n > 1$. %When $r = 1$, this is the definition of being relatively prime.
+		\begin{definition}[Relatively $r$-prime]
+			For a fixed integer $r>1$, we say that the integers $m_1, m_2, \mathellipsis, m_k$ are \textbf{relatively $r$-prime} if they have no common factor of the form $n^r$ for any integer $n > 1$. %When $r = 1$, this is the definition of being relatively prime.
 		\end{definition}
 		\begin{theorem}[Benkoski's Theorem]
 			Fix $k$, $r\in \mathbb{N}$ not both equal to 1, and let $q(n)$ denote the number of ordered $k$-tuples of positive integers less than or equal to $n$ that are relatively $r$-prime. Then, $\lim\limits_{n\to\infty} \frac{q(n) }{n^k}=\frac{1}{\zeta(rk)}$.
@@ -81,7 +81,7 @@
 			\item Use counting arguments to construct:
 			$\frac{N^{mn} - \Big(N^n - \Big(N - \Big\lfloor\frac{N}{p}\Big\rfloor\Big)^n\Big)^m}{N^{mn}}$
 			\item Apply the estimate $\frac{1}{n} \Big\lfloor \frac{n}{k} \Big\rfloor = \frac{1}{k} + O\Big(\frac{1}{n}\Big)$.
-			\item Divisibility by finitely many primes yields independent events.
+			\item Selecting a prime from a finite set of primes is an independent event.
 			\item Take limit $N \to \infty$. 
 		\end{enumerate}
 		\end{proof}
@@ -95,23 +95,20 @@
 		\begin{proof}
 			\begin{enumerate}
 				\item Bounded above by a convergent $p$-series.
-                \item Use Lebesgue Dominated Convergence Theorem for Series on previous theorem.
+                \item Use Lebesgue Dominated Convergence Theorem for Series.
 				\item This yields $ 1 - \prod_{p > B} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p_i}  \Big)^n\Big)^m\Big].$
 			\end{enumerate}
 		\end{proof}
 	\end{frame}
 
 	\begin{frame}
-		\begin{definition} Fix a positive integer $k$. The \textbf{$k$-GCD} of $n$ nonzero integers $x_1, ..., x_n$, written $k\text{-}\gcd(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{\text{th}}$ power divides each of $x_1, x_2, ..., x_n$.
+		\begin{definition}[$k$-GCD] Fix a positive integer $k$. The \textbf{$k$-GCD} of $n$ nonzero integers $x_1, ..., x_n$, written $k\text{-}\gcd(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{\text{th}}$ power divides each of $x_1, x_2, ..., x_n$.
 		\end{definition}	
-	
-		\begin{definition} When $k\text{-}\gcd(x_1,x_2,\mathellipsis,x_n)=1$ we say that  $x_1,x_2,\mathellipsis,x_n$ are \textbf{relatively $k$-prime}.
-		\end{definition}
 		
 		\begin{alertblock}{Remark}
-			As $k$ varies, it is possible that the $k$-GCD of a set of nonzero integers can change. 
+			As $k$ varies, it is possible that the $k$-GCD also varies.\newline
+                When $k=1$, the $k$-GCD reduces to the usual GCD. 
 		\end{alertblock}
-
 	\end{frame}
 
 	\begin{frame}
@@ -150,7 +147,7 @@
 		\begin{enumerate}
 			\item Use counting argument: $\frac{H(N)^{nm}-\Big[H(N)^n - \Big(H(N) - H\Big(\frac{N}{\f{N(p)}}\Big)\Big)^n\Big]^m}{H(N)^{nm}}$
 			\item Apply estimate: $\frac{1}{H(n)} H\Big(\frac{n}{k}\Big) = \frac{1}{k} + O\Big(\frac{1}{n^{\epsilon}}\Big).$
-			\item Divisibility by finitely many primes yields independent events.
+			\item Selecting a prime from a finite set of primes is an independent event.
 			\item Take limit $N \to \infty$.
 		\end{enumerate}
 	\end{proof}
@@ -258,5 +255,4 @@
 		 Knowledge of B-Smooth numbers $\iff$ Efficient Factorization Algorithms $\iff$ Stronger encryption algorithms! 
 	\end{alertblock}
 	\end{frame}
-
 \end{document}

@@ -4,6 +4,7 @@
 \usepackage{tabularx}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{geometry}
 
 \def\thesistitle{The Probability that the GCD of Products of Ideals in a Number Ring is B-smooth}
 \def\name{Adrian Vazquez}
@@ -154,25 +155,29 @@ by
 {\center\emph{Signature page for the Masters in Mathematics Thesis of \name}}
 
 \committee
-
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A dedication is optional. Edit this section to make it your own or delete it.
- \newpage
- \setlength{\topmargin}{-0.4375in}
- \setlength{\paperheight}{11.5in}
-
-\newpage
-
-\begin{center}
-\vspace*{50mm}
-{\bf Acknowledgements}
-\end{center}
-
-
-\newpage
-
+ %\newpage
+ %\setlength{\topmargin}{-0.84375in}
+ %\setlength{\paperheight}{11.5in}
+\newgeometry{top=0.1cm}
 \pagestyle{plain}
+\section*{Acknowledgements}
+    First and foremost, I would like to express my sincerest gratitude to my thesis advisor Dr. Brian Sittinger, whose patience, guidance, and expertise were critical to my success in my independent studies courses and this thesis. I would also like to thank Dr. Ivona Grzegorczyk for her guidance and advice in academic matters and for serving in my thesis committee.
+    
+    I give a very special thanks to my former colleague Chris Luk, Chief Engineer at Raytheon Intelligence and Space. Chris' enthusiastic, scholarly, and cultured personality kept my motivation and spirits high during the long hours at the Point Mugu Engineering Center and encouraged me pursue a master's degree. I also give a special thanks to my supervisor Cecelia Feit, Chief Engineer Charles Yi, and Thomas To for their glowing letters of recommendation. I express my deepest gratitude to Gilbert Gutierrez and Hoang Tran for lending me their support and expertise during the execution of the AN/ALR-67 Task Orders.
+    
+    From the California State University Northridge mathematics department, I am deeply indebted to Dr. Jason Lo who revealed to me the beauty of algebra, and to Dr. Majid Mojirsheibani for revealing the beauty of probability theory.
+     
+    I thank professors George Cracuin, Debbie Wong, Emil Sargsyan, and Agnes Marsubian from the Los Angeles Mission College mathematics department, whose lectures and high standards fostered the growth, discipline, and mathematical foundation necessary for my success in university and my career.
+     
+    Finally, I give a very special thanks to A. D. Aleksandrov, A. N. Kolmogorov, M. A. Lavrent’ev for authoring \textit{Mathematics: Its Content, Methods and Meaning}, and the anonymous person who recommended that I read it. This book is the primary reason that I decided to study mathematics.
+\restoregeometry
+\newpage
+
+%\pagestyle{plain}
 
 %{\bf Abstract}
 %\bigskip
@@ -197,7 +202,7 @@ Subsequently in 1900, Lehmer \cite{Lehmer} extended Dirichlet's result by provin
 
 In this paper we provide more concise versions of Cheon and Kim's results by applying counting arguments. We then use our method to generalize their results to the algebraic integers. 
 
-\subsection{B-smooth numbers in Cryptography}
+\subsection{\texorpdfstring{$B$}{\mathbb{B}}-smooth Numbers in Cryptography}
 Given sufficiently large integers, there is currently no known efficient non-quantum prime factorization algorithm.
 The difficulty of the prime factorization problem is leveraged by cryptographers to build cryptographic schemes that are difficult to crack using even the current most efficient algorithm, the General Number Field Sieve, running on hundreds of specialized computers (one can imagine the near impossibility of randomly guessing the factorization). 
 
@@ -214,7 +219,7 @@ $$q = 45534498646735972188403686897274408864356301263205069600999044599.$$
 The history of factorization algorithms is rich and deep, but for the sake of brevity, we provide a condensed history of factorization algorithms and describe how smooth numbers and their error estimates play a central role in their discovery.
 
 %** Trial division
-The most naive approach to factorization is called trial division (sometimes called direct search factorization) which was described by Fibonacci in his book \textit{Liber Abaci} \cite{Mollin}. In this algorithm, an integer $N$ is systematically divided by all integers in $[2, \sqrt{N}]$ until we find the factorization. While this algorithm is guaranteed to produce the correct result every time, it would be completely impractical for factoring large integers in a reasonable amount of time. Since then, mathematicians have devised algorithms which exploit the properties of integers in order to reduce the amount of computations required. In turn, this reduces the time need to find the factorization.
+The most na\"ive approach to factorization is called trial division (sometimes called direct search factorization) which was described by Fibonacci in his book \textit{Liber Abaci} \cite{Mollin}. In this algorithm, an integer $N$ is systematically divided by all integers in $[2, \sqrt{N}]$ until we find the factorization. While this algorithm is guaranteed to produce the correct result every time, it would be completely impractical for factoring large integers in a reasonable amount of time. Since then, mathematicians have devised algorithms which exploit the properties of integers in order to reduce the amount of computations required. In turn, this reduces the time need to find the factorization.
 
 %**** Fermat's Factoring Method 
 On April 7 1643, Fermat responded to a letter from Mersenne asking for a method to factor the integer $100895598169=898423\cdot 112303$ within a day \cite{Shiu}. Fermat discovered a method of factoring integers by utilizing the observation that any odd integer $n$ can be written as a difference of squares $N=a^2-b^2=(a+b)(a-b)$ where $a,b$ are non trivial. Fermat's Factorization Method works by selecting values for $a\geq\sqrt{N}$ until $\sqrt{a^2-N}$ is an integer, yielding $b$. However since
@@ -237,8 +242,8 @@ We have now seen that finding efficient ways of identifying $B$-smooth numbers i
 
 Smooth numbers also have applications, including: cracking weak cryptography schemes, creating strong hashing functions, primality testing, and error correcting functions \cite{Naccache}.
 
-\section{Probability that the GCD of products of positive integers is  B-smooth}
-We now provide concise proofs for the probability that the GCD and $k$-GCD are $B$-smooth by using counting arguments. Appendix A contains detailed versions of Cheon and Kim's original proofs using the inclusion-exclusion principle. %Hyperref? 
+\section{Probability that the GCD of Products of Positive Integers is  \texorpdfstring{$B$}{\mathbb{B}}-smooth}
+We now provide concise proofs for the probability that the GCD and $k$-GCD are $B$-smooth by using counting arguments. Appendix A contains detailed versions of Cheon and Kim's original proofs using the inclusion-exclusion principle.
 
 \begin{definition} Let $B$ be a fixed positive integer. A positive integer $x$ is \textbf{\bm{$B$}-smooth (\bm{$B$}-friable)} if $x$ has no prime divisor greater than $B$. 
 \end{definition}
@@ -348,7 +353,7 @@ Having derived the probability that the GCD of products of randomly chosen posit
 	
 	\vspace{.1 in}
 	
-	Next, we derive the lower bound for our probabilistic expression. We start by splitting the product at $\hat{n}$. Then we apply Bernoulli's inequality in the form $(1 - x)^n \geq 1 - x$ where $x \in [0, 1]$ and $n \geq 1$, where we take $x = \frac{1}{p}$ where $p > \hat{n}$ is a prime number. This yields 
+	Next, we derive the lower bound for our probabilistic expression. We start by splitting the product at $\hat{n}$. Then we apply Bernoulli's inequality in the form $(1 - x)^n \geq 1 - nx$ where $x \in [0, 1]$ and $n \geq 1$, where we take $x = \frac{1}{p}$ where $p > \hat{n}$ is a prime number. This yields 
 	$$\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big] \geq \prod_{B<p\leq \hat{n}}\Big[1 - \Big(1 - \Big(1 - \frac{1}{p}\Big)^n \Big)^m \Big] \cdot \prod_{p>\hat{n}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big).$$
 	
 	\vspace{.1 in}
@@ -382,7 +387,7 @@ Having derived the probability that the GCD of products of randomly chosen posit
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%
-\section{Probability that the k-GCD of products of positive integers is  B-smooth}
+\section{Probability that the \texorpdfstring{$k$}{\mathbb{k}}-GCD of Products of Positive Integers is  \texorpdfstring{$B$}{\mathbb{B}}-smooth}
 In this section we extend the previous results to the $k$-GCD, and in a similar fashion, begin with a more concise proof.
 
 \begin{definition} Fix a positive integer $k$. The \textbf{$k$-GCD} of $n$ nonzero integers $x_1, ..., x_n$, written $\gcd_k(x_1,x_2, ...,x_n)$, is the largest integer whose $k^{\text{th}}$ power divides each of $x_1, x_2, ..., x_n$.
@@ -469,10 +474,6 @@ We have found the probability that the $k$-GCD of products of random integers is
 	$$\prod_{p>B} \Big[1 - \Big(1 - \Big(1-\frac{1}{p_i}\Big)^n \Big(1 + \frac{{}_nH_1}{p} + ... + \frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].$$
 \end{theorem}
 
-%\todo[inline, color=yellow]{Double Check: Was erroneously a duplicate of 1-GCD proof.}
-%Ok
-
-
 \begin{proof}
 	Letting $P(l, N)$ denote the probability in the previous theorem (and for convenience setting $P(0, N) = 1$, we define $g_N(l) = P(l-1, n) - P(l, n)$. Then, we see that $g_N(l)$ is precisely the probability that $k\text{-}\gcd(\prod_{j=1}^n r_{1j}, ... , \prod_{j=1}^n r_{mj})$ is coprime to $p_1, \mathellipsis, p_{l-1}$ and divisible by $p_l$ for uniformly and independently chosen $r_{ij}$'s from $\{1, 2, ..., N\}$. In particular, note that $g_N(l)$ is non-negative. We claim that we can move the limit to infinity past the summation sign:
 	$$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s).$$
@@ -503,7 +504,7 @@ We have found the probability that the $k$-GCD of products of random integers is
 
 
 
-\section{Background Material for the Algebraic Integer case}
+\section{Background Material for the Algebraic Integer Case}
 We now provide some key concepts involving algebraic integers that we use for the remainder of the proofs in this paper. Unsurprisingly, the derivations of these results have the similar flow and form to their algebraic integer counterparts, and by choosing particular values, will yield the rational integer cases. For further details, please consult a textbook on Algebraic Number Theory, such as \cite{Marcus}.
 
 \begin{definition} A complex number is an \textbf{algebraic number} if it satisfies a polynomial with rational coefficients.
@@ -568,7 +569,7 @@ Note that $n$ need not be an integer. The following theorem provides an estimate
 
 \noindent \textbf{Remark:} If $K=\mathbb{Q}$ so that $\mathcal{O} = \mathbb{Z}$, then $H$ reduces to the floor function. 
 
-\section{Probability that the GCD of products of algebraic integers is B-smooth}
+\section{Probability that the GCD of Products of Algebraic Integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth}
 
 \begin{definition} Let $B$ be a fixed positive integer and $\mathcal{O}$ be an algebraic number ring. A nonzero ideal $\mathfrak{a}$ in $\mathcal{O}$ is \textbf{$B$-smooth} (\textbf{$B$-friable}) if $\mathfrak{a}$ has no prime ideal factor whose norm is greater than $B$. 
 \end{definition}
@@ -622,9 +623,6 @@ is coprime to the first $l$ prime ideals (arranged in non-decreasing order by no
 
 Setting \(\mathcal{O}=\mathbb{Z}\), prime ideals are substituted for the prime integers, and \(\epsilon=1\), yields the same result as for the integers case. 
 
-%\todo[inline, color=yellow]{Not $c=1$, should $\epsilon=1$}
-%Answer: Yes!
-
 As in the case for the integers, this only provides the probability for the first \(l\) prime ideals greater than \(B\). Using the Dominated Convergence Theorem, we can take the limit as \(l\) approaches infinity.
 
 \begin{theorem}
@@ -659,7 +657,7 @@ As in the case for the integers, this only provides the probability for the firs
 \end{proof}
 
 
-\section{Probability that the k-GCD of products of algebraic integers is B-smooth}
+\section{Probability that the \texorpdfstring{$k$}{\mathbb{k}}-GCD of Products of Algebraic Integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth}
 
 \begin{definition} Fix a positive integer $k$. The \bm{$k\text{-}\gcd$} of $n$ prime ideals $\f{a}_1$, $\f{a}_2$,$\mathellipsis$, $\f{a}_n$ in a number ring $\mathcal{O}$, written $\gcd_k(\f{a}_1,\f{a}_2, \mathellipsis,\f{a}_n)$, is the largest prime ideal whose $k^{\text{th}}$ power divides each of $\f{a}_1, \f{a}_2,\mathellipsis, \f{a}_n$.
 \end{definition}	
@@ -762,8 +760,9 @@ $$\lim_{N \to \infty} \sum_{s=1}^{\infty} g_N(s) = 1 - \prod_{\f{N}(\f{p}) > B} 
 \noindent Then since $\displaystyle \sum_{s=1}^{\infty} \lim_{N \to \infty} g_N(s)$ represents the complement of the probability we wanted to compute, the Dominated Convergence Theorem yields the desired assertion.
 \end{proof}
 
+\newpage
 \section{Appendix}
-\subsection{Probability that the GCD of products of positive integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth using Inclusion-Exclusion}
+\subsection{Probability that the GCD of Products of Positive Integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth Using the Inclusion-Exclusion Principle}
 For purposes of comparison to the previous proof, we now show Cheong and Kim's original proof via the inclusion-exclusion principle in detail.
 \begin{theorem}
 	Fix positive integers $B$ and $N$, and let $p_1, p_2, ...$ be the primes greater than $B$ in increasing order. If $X_l = \{p_1, p_2, ..., p_l\}$, then
@@ -789,7 +788,7 @@ In order to accomplish this, we use the Inclusion-Exclusion principle to enumera
 	$$T(l,N)=\sum_{P\subset X_l}{(-1)^{|P|}}\Bigg[\sum_{Q\subset P}(-1)^{|Q|}\Big(\sum_{R\subset Q}(-1)^{|R|}\Big\lfloor\frac{N}{\prod_{p\in R} p}\Big\rfloor\Big)^n\Bigg]^m.$$
 \end{proof}
 
-\subsection{Probability that the \texorpdfstring{$k$}{\mathbb{k}}-GCD of products of positive integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth with Inclusion-Exclusion}
+\subsection{Probability that the \texorpdfstring{$k$}{\mathbb{k}}-GCD of Products of Positive Integers is \texorpdfstring{$B$}{\mathbb{B}}-smooth using the Inclusion-Exclusion Principle}
 
 \begin{theorem} Let $p$ be a prime number and $r_{ij}$ be nonzero integers for each $1 \leq i \leq m$ and $1 \leq j \leq n$. Then
 	$p \mid \gcd_k(\prod_{j=1}^{n}r_{1j},\mathellipsis,\prod_{j=1}^n r_{mj})$ if and only if $p^k \mid \prod_{j}r_{ij}$ for some $i$.
@@ -849,13 +848,7 @@ Thus,
 	Finally, substitute these results into the original expression and simplify. Letting $N\to \infty$, we see that the error approaches 0 as desired.
 \end{proof}
 
-%\mathchardef\mhyphen="2D
-%%\todo[inline, color=orange]{Use $k\mhyphen\gcd$ instead of $\gcd_k$, make new operator}
 % I prefer \gcd_k; it looks nicer!
-
-
-%\todo[inline, color=orange]{texorpdf on section titles}
-%Yes as well!
 
 \newpage
 

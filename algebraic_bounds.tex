@@ -1,0 +1,258 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+%\newtheorem{proof}{Proof}
+%% Author Preamble
+\usepackage{todonotes}
+\newcommand{\f}[1]{\mathfrak{#1}}
+\usepackage[capitalize]{cleveref}
+\usepackage{bm}
+%\usepackage[style=numeric, backend=biber]{biblatex}
+%\addbibresource{thesis.bib}
+%% ~Author Preamble
+
+\begin{document}
+	\todo[color=green, inline]{Fixed issue with using incorrect binomial coefficient}
+	\section{Algebraic GCD Bounds}
+	Having derived the probability that the GCD of products of randomly chosen positive integers is $B$-smooth, we now find more convenient bounds for this product representation.
+	
+	\begin{theorem} The probability that $\gcd(\prod_{j=1}^n \f{a}_{1j}, ..., \prod_{j=1}^{n}\f{a}_{mj})$ is $B$-smooth is bounded above by 
+		$$\frac{1}{\zeta_\mathcal{O}(m)}\prod_{\f{N}(\f{p})\leq B}\Big(1-\frac{1}{\f{N}(\f{p})^m}\Big)^{-1},$$
+		and is bounded below by 
+		$$\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m\Big] \cdot \prod_{\hat{n}<\f{N}(\f{p})\leq\hat{r}} \Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \frac{1}{\zeta_\mathcal{O}(s)},$$
+		where $\hat{n}=\max\{n,B\}$, $\hat{r}=\max\{\hat{n}, \lfloor n^{\frac{m}{m-1}}+1\rfloor\}$, and $s = m(1 - \log_{\hat{r}}{n}) > 1$.
+	\end{theorem} 
+	
+	\noindent \textbf{Remark:} It is understood that for the lower bound, the first finite product is equal to 1 if $B = \hat{n}$, and the second finite product is equal to 1 if $\hat{n}=\hat{r}$.
+	
+	\begin{proof}
+		We start by deriving the upper bound. Since $(1 - \frac{1}{\f{N}(\f{p})})^n$ decreases as a function of $n$ due to $1 - \frac{1}{\f{N}(\f{p})} \in (0, 1)$, we obtain
+		$$\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big] \leq \prod_{\f{N}(\f{p})>B} \Big(1 - \frac{1}{\f{N}(\f{p})^m}\Big) = \frac{1}{\zeta_\mathcal{O}(m)} \prod_{\f{N}(\f{p})\leq B} \Big(1 - \frac{1}{\f{N}(\f{p})^m}\Big)^{-1},$$
+		where the rightmost equality uses the infinite product representation of the Dedekind zeta function.
+		
+		\vspace{.1 in}
+		
+		Next, we derive the lower bound for our probabilistic expression. We start by splitting the product at $\hat{n}$. Then we apply Bernoulli's inequality in the form $(1 - x)^n \geq 1 - x$ where $x \in [0, 1]$ and $n \geq 1$, where we take $x = \frac{1}{\f{N}(\f{p})}$ where $\f{p}$ is a prime ideal such that $\f{N}(\f{p}) > \hat{n}$. This yields 
+		$$\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big] \geq \prod_{B<\f{N}(\f{p})\leq \hat{n}}\Big[1 - \Big(1 - \Big(1 - \frac{1}{\f{N}(\f{p})}\Big)^n \Big)^m \Big] \cdot \prod_{\f{N}(\f{p})>\hat{n}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big).$$
+		
+		\vspace{.1 in}
+		
+		It remains to find a lower bound for $\prod_{\f{N}(\f{p})>\hat{n}} (1 - (\frac{n}{\f{N}(\f{p})})^m)$. From using the definition of $s$, we see that $\f{N}(\f{p}) \geq \hat{r}$ is equivalent to $(\frac{n}{\f{N}(\f{p})})^m \leq \frac{1}{\f{N}(\f{p})^s}$. Using this fact in conjunction to the infinite product representation for the Dedekind zeta function, we obtain 
+		\begin{align*} \prod_{\f{N}(\f{p})>\hat{n}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) &= \prod_{\hat{n}< \f{N}(\f{p}) \leq \hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \prod_{\f{N}{(\f{p})}>\hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big)\\ &\geq  \prod_{\hat{n}< \f{N}(\f{p}) \leq \hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \prod_{\f{N}(\f{p})>\hat{r}}\Big(1 - \frac{1}{\f{N}(\f{p})^s}\Big)\\ &\geq  \prod_{\hat{n}< \f{N}(\f{p}) \leq \hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \frac{1}{\zeta_\mathcal{O}(s)}. \end{align*}
+		The claimed lower bound now directly follows. 
+		
+		\vspace{.1 in}
+		
+		It remains to show that $s > 1$. To this end, observe that since $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$ and $\hat{r} = \max\{n, B, r\}$, we have $\hat{r} \geq r > n^{\frac{m}{m-1}}$. Hence, we conclude that $s = m(1 - \log_{\hat{r}}{n}) > 1$ as required.
+	\end{proof}
+	
+	\section{Algebraic K-GCD Bounds}
+	Having derived the probability that the $k$-GCD of products of randomly chosen positive integers is $B$-smooth, we now find more convenient bounds for this product representation.\newline
+	
+	The following simplification will be useful for the following proofs:
+	\begin{align*}
+		\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big) = \sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(\frac{1}{\f{N}(\f{p})}\Big)^t.
+	\end{align*}
+	
+	\begin{theorem} The probability that $\gcd(\prod_{j=1}^n \f{a}_{1j}, ..., \prod_{j=1}^{n}\f{a}_{mj})$ is $B$-smooth is bounded above by 
+		$$\frac{1}{\zeta_\mathcal{O}(m)}\prod_{\f{N}(\f{p})\leq B}\Big(1-\frac{1}{\f{N}(\f{p})^m}\Big)^{-1},$$
+		and is bounded below by 
+		$$\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big] \cdot \prod_{\hat{n}<\f{N}(\f{p})\leq\hat{r}} \Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \frac{1}{\zeta_\mathcal{O}(s)},$$
+		where $\hat{n}=\max\{n,B\}$, $\hat{r}=\max\{\hat{n}, \lfloor n^{\frac{m}{m-1}}+1\rfloor\}$, and $s = m(1 - \log_{\hat{r}}{n}) > 1$.
+	\end{theorem} 
+	
+	\noindent \textbf{Remark:} It is understood that for the lower bound, the first finite product is equal to 1 if $B = \hat{n}$, and the second finite product is equal to 1 if $\hat{n}=\hat{r}$.
+	\newline
+	
+	\begin{proof}
+		We start by deriving the upper bound. 
+		From the binomial formula, for $x=(1-\frac{1}{\f{N}(\f{p}^r)})$, and $y=\frac{1}{\f{N}(\f{p}^r)}$,
+		$$\sum_{t=0}^{k-1}\binom{n}{t}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^{n-t}\Big(\frac{1}{\f{N}(\f{p}^r)}\Big)^t=(x+y)^n.$$
+		Next, we substitute an identity for the binomial coefficient,
+		
+		$$\sum_{t=0}^{k-1}\Big(\frac{n}{k}\Big)\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^{n-t}\Big(\frac{1}{\f{N}(\f{p}^r)}\Big)^t=(x+y)^n.$$
+		
+		Which implies, 
+		$$\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^{n-t}\Big(\frac{1}{\f{N}(\f{p}^r)}\Big)^t=\Big((x+y)^n\Big(\sum_{t=0}^{k-1}\frac{k}{n}\Big)\Big).$$
+		
+		Substituting in $x,y$, for $k\leq n$, we see that 
+		$$\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^{n-t}\Big(\frac{1}{\f{N}(\f{p}^r)}\Big)^t=\Big((x+y)^n\Big(\sum_{t=0}^{k-1}\frac{k}{n}\Big)\Big)\leq1.$$
+		
+		Finally, by dividing by $\sum_{t=0}^{k-1}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^{-t}$, 
+		$$\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^{n}\Big(\frac{1}{\f{N}(\f{p}^r)}\Big)^t<\sum_{t=0}^{k-1}\Big(1-\frac{1}{\f{N}(\f{p}^r)}\Big)^t.$$
+		
+		Thus we can form the following chain of inequalities,
+		\begin{align*}
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big] = \\
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m = \\
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big(1 - \sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(\frac{1}{\f{N}(\f{p})}\Big)^t\Big)^m \leq \\
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big(1 - \sum_{t=0}^{k-1}\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^t\Big)^m \leq \\
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big(1 - \Big(1-\frac{1}{\f{N}(\f{p})}\Big)\Big)^m \leq \\
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big(1-\frac{1}{\f{N}(\f{p})}\Big)^m \leq \\
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big(1-\frac{1}{\f{N}(\f{p})^m}\Big). \\
+		\end{align*}
+		
+		Thus we have,
+		\begin{align*}
+			&\prod_{\f{N}(\f{p})>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big] \leq \\
+			&\prod_{\f{N}(\f{p})>B} \Big(1 - \frac{1}{\f{N}(\f{p})^m}\Big) = \frac{1}{\zeta_\mathcal{O}(m)} \prod_{\f{N}(\f{p})\leq B} \Big(1 - \frac{1}{\f{N}(\f{p})^m}\Big)^{-1},
+		\end{align*}
+		
+		where the rightmost equality uses the infinite product representation of the Dedekind zeta function.
+		
+		\vspace{.1 in}
+		
+		Next, we derive the lower bound for our probabilistic expression. First we split the product at $\hat{n}$,
+		
+		\begin{align*}
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&=\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&\cdot\prod_{\f{N}(\f{p})\geq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big].\\
+		\end{align*}
+		
+		Next, we apply our simplification to the right most product,
+		\begin{align*}
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&\cdot\prod_{\f{N}(\f{p})\geq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&=\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&\cdot\prod_{\f{N}(\f{p})\geq\hat{n}} \Big[1 - \Big(1 -\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(\frac{1}{\f{N}(\f{p})}\Big)^t\Big)^m\Big].
+		\end{align*}
+		
+		Next, using an estimate from Ryan DeMoss, we bound the summation in the rightmost product by applying Bernoulli's inequality in the form $(1 - x)^n \geq 1 - nx$ where $x \in [0, 1]$ and $n \geq 1$, where we take $x = \frac{1}{\f{N}(\f{p})}$ where $\f{p}$ is a prime ideal such that $\f{N}(\f{p}) > \hat{n}$. Thus for all $k\geq2$,
+		\begin{align*}
+			&\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(\frac{1}{\f{N}(\f{p})^t}\Big)\\ &\geq \Big(1-\frac{1}{\f{N}(\f{p})}\Big)\\
+			&\geq\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n+n\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^{n-1}\Big(\frac{1}{\f{N}(\f{p})}\Big)\\
+			&=\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^{n-1}\Big(1+\frac{n-1}{\f{N}(\f{p})}\Big)\\
+			&\geq\Big(1-\frac{n-1}{\f{N}(\f{p})}\Big)\Big(1+\frac{n-1}{\f{N}(\f{p})}\Big) \text{ by Bernoulli's inequality}\\
+			&=1-\Big(\frac{n-1}{\f{N}(\f{p})}\Big)^2\\
+			&\geq 1-\Big(\frac{n-1}{\f{N}(\f{p})}\Big)\\
+			&\geq 1-\Big(\frac{n}{\f{N}(\f{p})}\Big).\\
+		\end{align*}
+		
+		Thus we have,
+		\begin{align*}
+			&\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&\cdot\prod_{\f{N}(\f{p})\geq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\\
+			&\leq\prod_{B<\f{N}(\f{p})\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{\f{N}(\f{p})}\Big)^n\Big(1+\frac{{}_nH_1}{\f{N}(\f{p})}+\mathellipsis+\frac{{}_nH_{k-1}}{\f{N}(\f{p})^{k-1}}\Big)\Big)^m\Big]\cdot \prod_{\f{N}(\f{p})\geq\hat{n}} \Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big).\\
+		\end{align*}
+		
+		\vspace{.1 in}
+		
+		It remains to find a lower bound for $\prod_{\f{N}(\f{p})>\hat{n}} (1 - (\frac{n}{\f{N}(\f{p})})^m)$. From using the definition of $s$, we see that $\f{N}(\f{p}) \geq \hat{r}$ is equivalent to $(\frac{n}{\f{N}(\f{p})})^m \leq \frac{1}{\f{N}(\f{p})^s}$. Using this fact in conjunction to the infinite product representation for the Dedekind zeta function, we obtain 
+		\begin{align*} \prod_{\f{N}(\f{p})>\hat{n}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) &= \prod_{\hat{n}< \f{N}(\f{p}) \leq \hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \prod_{\f{N}{(\f{p})}>\hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big)\\ &\geq  \prod_{\hat{n}< \f{N}(\f{p}) \leq \hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \prod_{\f{N}(\f{p})>\hat{r}}\Big(1 - \frac{1}{\f{N}(\f{p})^s}\Big)\\ &\geq  \prod_{\hat{n}< \f{N}(\f{p}) \leq \hat{r}}\Big(1 - \Big(\frac{n}{\f{N}(\f{p})}\Big)^m\Big) \cdot \frac{1}{\zeta_\mathcal{O}(s)}. \end{align*}
+		The claimed lower bound now directly follows. 
+		
+		\vspace{.1 in}
+		
+		It remains to show that $s > 1$. To this end, observe that since $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$ and $\hat{r} = \max\{n, B, r\}$, we have $\hat{r} \geq r > n^{\frac{m}{m-1}}$. Hence, we conclude that $s = m(1 - \log_{\hat{r}}{n}) > 1$ as required.
+	\end{proof}
+
+	\section{Rational K-GCD Bounds}
+		Having derived the probability that the $k$-GCD of products of randomly chosen positive integers is $B$-smooth, we now find more convenient bounds for this product representation.\newline
+		
+		The following simplification will be useful for the following proofs:
+		\begin{align*}
+			\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big) = \sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p}\Big)^n\Big(\frac{1}{{p}}\Big)^t.
+		\end{align*}
+		
+		\begin{theorem} The probability that $\gcd(\prod_{j=1}^n r_{1j}, ..., \prod_{j=1}^{n}r_{mj})$ is $B$-smooth is bounded above by 
+			$$\frac{1}{\zeta(m)}\prod_{p\leq B}\Big(1-\frac{1}{p^m}\Big)^{-1},$$
+			and is bounded below by 
+			$$\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big] \cdot \prod_{\hat{n}<p\leq\hat{r}} \Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \frac{1}{\zeta(s)},$$
+			where $\hat{n}=\max\{n,B\}$, $\hat{r}=\max\{\hat{n}, \lfloor n^{\frac{m}{m-1}}+1\rfloor\}$, and $s = m(1 - \log_{\hat{r}}{n}) > 1$.
+		\end{theorem} 
+		
+		\noindent \textbf{Remark:} It is understood that for the lower bound, the first finite product is equal to 1 if $B = \hat{n}$, and the second finite product is equal to 1 if $\hat{n}=\hat{r}$.
+		\newline
+		
+		\begin{proof}
+			We start by deriving the upper bound. 
+			From the binomial formula, for $x=(1-\frac{1}{p^r})$, and $y=\frac{1}{p^r}$,
+			$$\sum_{t=0}^{k-1}\binom{n}{t}\Big(1-\frac{1}{p^r}\Big)^{n-t}\Big(\frac{1}{p^r}\Big)^t=(x+y)^n.$$
+			Next, we substitute an identity for the binomial coefficient,
+			
+			$$\sum_{t=0}^{k-1}\Big(\frac{n}{k}\Big)\binom{n-1}{t-1}\Big(1-\frac{1}{p^r}\Big)^{n-t}\Big(\frac{1}{p^r}\Big)^t=(x+y)^n.$$
+			
+			Which implies, 
+			$$\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p^r}\Big)^{n-t}\Big(\frac{1}{p^r}\Big)^t=\Big((x+y)^n\Big(\sum_{t=0}^{k-1}\frac{k}{n}\Big)\Big).$$
+			
+			Substituting in $x,y$, for $k\leq n$, we see that 
+			$$\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p^r}\Big)^{n-t}\Big(\frac{1}{p^r}\Big)^t=\Big((x+y)^n\Big(\sum_{t=0}^{k-1}\frac{k}{n}\Big)\Big)\leq1.$$
+			
+			Finally, by dividing by $\sum_{t=0}^{k-1}\Big(1-\frac{1}{p^r}\Big)^{-t}$, 
+			$$\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p^r}\Big)^{n}\Big(\frac{1}{p^r}\Big)^t<\sum_{t=0}^{k-1}\Big(1-\frac{1}{p^r}\Big)^t.$$
+			
+			Thus we can form the following chain of inequalities,
+			\begin{align*}
+				&\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big] = \\
+				&\prod_{B<p\leq\hat{n}} \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m = \\
+				&\prod_{B<p\leq\hat{n}} \Big(1 - \sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p}\Big)^n\Big(\frac{1}{p}\Big)^t\Big)^m \leq \\
+				&\prod_{B<p\leq\hat{n}} \Big(1 - \sum_{t=0}^{k-1}\Big(1-\frac{1}{p}\Big)^t\Big)^m \leq \\
+				&\prod_{B<p\leq\hat{n}} \Big(1 - \Big(1-\frac{1}{p}\Big)\Big)^m \leq \\
+				&\prod_{B<p\leq\hat{n}} \Big(1-\frac{1}{p}\Big)^m \leq \\
+				&\prod_{B<p\leq\hat{n}} \Big(1-\frac{1}{p^m}\Big). \\
+			\end{align*}
+			
+			Thus we have,
+			\begin{align*}
+				&\prod_{p>B} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big] \leq \\
+				&\prod_{p>B} \Big(1 - \frac{1}{p^m}\Big) = \frac{1}{\zeta(m)} \prod_{p\leq B} \Big(1 - \frac{1}{p^m}\Big)^{-1},
+			\end{align*}
+			
+			where the rightmost equality uses the infinite product representation of the Riemann zeta function.
+			
+			\vspace{.1 in}
+			
+			Next, we derive the lower bound for our probabilistic expression. First we split the product at $\hat{n}$,
+			
+			\begin{align*}
+				&\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&=\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&\cdot\prod_{p\geq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big].\\
+			\end{align*}
+			
+			Next, we apply our simplification to the right most product,
+			\begin{align*}
+				&\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&\cdot\prod_{p\geq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&=\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&\cdot\prod_{p\geq\hat{n}} \Big[1 - \Big(1 -\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p}\Big)^n\Big(\frac{1}{p}\Big)^t\Big)^m\Big].
+			\end{align*}
+			
+			Next, using an estimate from Ryan DeMoss, we bound the summation in the rightmost product by applying Bernoulli's inequality in the form $(1 - x)^n \geq 1 - nx$ where $x \in [0, 1]$ and $n \geq 1$, where we take $x = \frac{1}{p}$ where $p$ is a rational prime such that $p > \hat{n}$. Thus for all $k\geq2$,
+			\begin{align*}
+				&\sum_{t=0}^{k-1}\binom{n-1}{t-1}\Big(1-\frac{1}{p}\Big)^n\Big(\frac{1}{p}\Big)^t\\
+				 &\geq \Big(1-\frac{1}{p}\Big)\\
+				&\geq\Big(1-\frac{1}{p}\Big)^n+n\Big(1-\frac{1}{p}\Big)^{n-1}\Big(\frac{1}{p}\Big)\\
+				&=\Big(1-\frac{1}{p}\Big)^{n-1}\Big(1+\frac{n-1}{p}\Big)\\
+				&\geq\Big(1-\frac{n-1}{p}\Big)\Big(1+\frac{n-1}{p}\Big) \text{ by Bernoulli's inequality}\\
+				&=1-\Big(\frac{n-1}{p}\Big)^2\\
+				&\geq 1-\Big(\frac{n-1}{p}\Big)\\
+				&\geq 1-\Big(\frac{n}{p}\Big).\\
+			\end{align*}
+			
+			Thus we have,
+			\begin{align*}
+				&\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&\cdot\prod_{p\geq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\\
+				&\leq\prod_{B<p\leq\hat{n}} \Big[1 - \Big(1 -\Big(1-\frac{1}{p}\Big)^n\Big(1+\frac{{}_nH_1}{p}+\mathellipsis+\frac{{}_nH_{k-1}}{p^{k-1}}\Big)\Big)^m\Big]\cdot \prod_{p\geq\hat{n}} \Big(1 - \Big(\frac{n}{p}\Big)^m\Big).\\
+			\end{align*}
+			
+			\vspace{.1 in}
+			
+			It remains to find a lower bound for $\prod_{p>\hat{n}} (1 - p^m)$. From using the definition of $s$, we see that $p \geq \hat{r}$ is equivalent to $(\frac{n}{p})^m \leq \frac{1}{p^s}$. Using this fact in conjunction to the infinite product representation for the Riemann zeta function, we obtain 
+			\begin{align*} \prod_{p>\hat{n}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) &= \prod_{\hat{n}< p \leq \hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \prod_{p>\hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big)\\ &\geq  \prod_{\hat{n}< p \leq \hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \prod_{p>\hat{r}}\Big(1 - \frac{1}{p^s}\Big)\\ &\geq  \prod_{\hat{n}< p \leq \hat{r}}\Big(1 - \Big(\frac{n}{p}\Big)^m\Big) \cdot \frac{1}{\zeta(s)}. \end{align*}
+			The claimed lower bound now directly follows. 
+			
+			\vspace{.1 in}
+			
+			It remains to show that $s > 1$. To this end, observe that since $r=\lfloor n^{\frac{m}{m-1}}+1\rfloor$ and $\hat{r} = \max\{n, B, r\}$, we have $\hat{r} \geq r > n^{\frac{m}{m-1}}$. Hence, we conclude that $s = m(1 - \log_{\hat{r}}{n}) > 1$ as required.
+		\end{proof}
+			
+\end{document}
